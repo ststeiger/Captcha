@@ -73,3 +73,90 @@ http://stackoverflow.com/questions/37223861/how-to-create-captcha-in-asp-net-cor
 http://andrewlock.net/introduction-to-authentication-with-asp-net-core/
 http://stackoverflow.com/questions/37398276/how-can-i-validate-a-jwt-passed-via-cookies
 https://blog.mariusschulz.com/2016/07/19/securing-authentication-cookies-in-asp-net-core
+
+http://dotnetthoughts.net/implementing-basic-captcha-in-asp-net-5-mvc-6/
+
+
+
+http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=iws-chapter08
+
+
+https://stackoverflow.com/questions/4628247/c-sharp-lib-for-processing-font-files-ttf-truetype-others
+
+https://stackoverflow.com/questions/523246/using-custom-ttf-font-for-drawstring-image-rendering
+
+
+
+
+
+var foo = new PrivateFontCollection();
+// Provide the path to the font on the filesystem
+foo.AddFontFile("...");
+
+var myCustomFont = new Font((FontFamily)foo.Families[0], 36f);
+
+
+
+
+http://www.codeproject.com/Tips/557423/Rendering-Text-with-OpenType-Fonts-Using-GDI
+
+https://www.dotnetperls.com/font
+
+
+
+
+-- select * from sys.types --where is_user_defined = 1
+-- create table non-computed + persisted-computed
+-- create primary-keys
+-- create unique_indices
+-- create foreign_keys
+-- create functions
+
+
+
+object sql_variant
+uid uniqueidentifier
+boolean bit
+char char nchar
+string text/ntext varchar/nvarchar
+byte[] image  varbinary binary
+date date
+time time
+
+
+tinyint
+smallint
+int
+bigint
+
+float
+real
+
+numeric
+decimal
+
+money
+smallmoney
+
+smalldatetime
+datetime2
+datetime 
+datetimeoffset 
+
+
+
+
+hierarchyid
+geometry
+geography
+timestamp
+
+
+xml
+sysname
+
+
+
+
+
+
