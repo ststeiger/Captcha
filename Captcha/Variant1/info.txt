@@ -1,0 +1,75 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+
+    class ccc
+    {
+    }
+}
+
+https://github.com/dchest/captcha
+https://stackoverflow.com/questions/19166140/how-do-can-i-use-lame-to-encode-an-wav-to-an-mp3-c-sharp
+https://stackoverflow.com/questions/12749641/how-to-convert-any-audio-format-to-mp3-using-c-sharp
+https://stackoverflow.com/questions/10783127/how-to-implement-custom-audio-capcha-in-asp-net
+https://stackoverflow.com/questions/10783127/how-to-implement-custom-audio-capcha-in-asp-net
+
+
+https://github.com/mtscout6/yeti/blob/master/src/Code/yeti/mp3/Mp3Writer.cs
+https://nlayer.codeplex.com/
+https://github.com/filoe/cscore
+https://github.com/filoe/cscore/blob/master/Samples/ConvertWavToMp3/Program.cs
+
+https://www.nuget.org/packages/microsoft-web-helpers/
+
+
+
+https://www.sitepoint.com/simple-captchas-php-gd/
+http://search.cpan.org/~burak/GD-SecurityImage-1.73/lib/GD/SecurityImage.pm
+
+
+https://blogs.msdn.microsoft.com/dotnet/2016/02/10/porting-to-net-core/
+
+
+https://github.com/dotnet/corefx/issues/1563
+
+
+http://www.codeproject.com/Articles/99148/Simple-CAPTCHA-Create-your-own-in-C
+
+
+https://captcha.com/asp.net-captcha.html
+http://picatcha.com/
+
+http://kirsanov.net/page/ASPNET-CAPTCHA.aspx
+
+
+https://github.com/uhub/awesome-c-sharp
+https://github.com/NuGet/PoliteCaptcha/tree/master/PoliteCaptcha
+
+
+
+
+
+http://www.csharpprogramming.tips/2013/08/warping-text-along-bezier-spline.html
+
+https://stackoverflow.com/questions/9018921/envelope-distortion-with-net-graphicspath
+http://lonetechie.com/2013/12/28/envelope-distortion-using-c-and-graphicspath-class/
+http://csharphelper.com/blog/2015/01/make-captcha-images-in-c/
+https://dotnetgeekblog.wordpress.com/2012/08/02/custom-captcha-image/
+https://kyodo-samurai.blogspot.ch/2012/11/create-captcha-image-protect-your-site.html
+https://amrsaafan.blogspot.ch/2008/09/how-to-make-captcha-image-in-c-net-and.html
+http://www.c-sharpcorner.com/uploadfile/biswapinky/captcha-in-Asp-Net/
+
+https://distinctcaptcha.codeplex.com/
+
+https://searchcode.com/codesearch/view/10114846/
+
+
+
+
+http://dotnetthoughts.net/implementing-basic-captcha-in-asp-net-5-mvc-6/
+http://stackoverflow.com/questions/37223861/how-to-create-captcha-in-asp-net-core-asp-net-mvc-6
+http://andrewlock.net/introduction-to-authentication-with-asp-net-core/
+http://stackoverflow.com/questions/37398276/how-can-i-validate-a-jwt-passed-via-cookies
+https://blog.mariusschulz.com/2016/07/19/securing-authentication-cookies-in-asp-net-core
