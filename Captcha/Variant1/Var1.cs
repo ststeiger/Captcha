@@ -1,12 +1,7 @@
 ﻿
-using System;
 using System.Web;
-using System.Drawing;
-using System.IO;
 using System.Web.SessionState;
-using System.Drawing.Imaging;
-using System.Drawing.Text;
-using System.Drawing.Drawing2D;
+
 
 
 namespace Captcha
@@ -50,7 +45,7 @@ namespace Captcha
         {
             int iHeight = 80;
             int iWidth = 190;
-            Random oRandom = new Random();
+            System.Random oRandom = new System.Random();
 
             int[] aBackgroundNoiseColor = new int[] { 150, 150, 150 };
             int[] aTextColor = new int[] { 0, 0, 0 };
@@ -58,66 +53,92 @@ namespace Captcha
 
             string[] aFontNames = new string[]
             {
-             "Comic Sans MS",
-             "Arial",
-             "Times New Roman",
-             "Georgia",
-             "Verdana",
-             "Geneva"
-            };
-            
-            FontStyle[] aFontStyles = new FontStyle[]
-            {  
-             FontStyle.Bold,
-             FontStyle.Italic,
-             FontStyle.Regular,
-             FontStyle.Strikeout,
-             FontStyle.Underline
+                 "Comic Sans MS",
+                 "Arial",
+                 "Times New Roman",
+                 "Georgia",
+                 "Verdana",
+                 "Geneva"
             };
 
-            HatchStyle[] aHatchStyles = new HatchStyle[]
+            System.Drawing.FontStyle[] aFontStyles = new System.Drawing.FontStyle[]
             {
-                 HatchStyle.BackwardDiagonal, HatchStyle.Cross, 
-	                HatchStyle.DashedDownwardDiagonal, HatchStyle.DashedHorizontal,
-                 HatchStyle.DashedUpwardDiagonal, HatchStyle.DashedVertical, 
-	                HatchStyle.DiagonalBrick, HatchStyle.DiagonalCross,
-                 HatchStyle.Divot, HatchStyle.DottedDiamond, HatchStyle.DottedGrid, 
-	                HatchStyle.ForwardDiagonal, HatchStyle.Horizontal,
-                 HatchStyle.HorizontalBrick, HatchStyle.LargeCheckerBoard, 
-	                HatchStyle.LargeConfetti, HatchStyle.LargeGrid,
-                 HatchStyle.LightDownwardDiagonal, HatchStyle.LightHorizontal, 
-	                HatchStyle.LightUpwardDiagonal, HatchStyle.LightVertical,
-                 HatchStyle.Max, HatchStyle.Min, HatchStyle.NarrowHorizontal, 
-	                HatchStyle.NarrowVertical, HatchStyle.OutlinedDiamond,
-                 HatchStyle.Plaid, HatchStyle.Shingle, HatchStyle.SmallCheckerBoard, 
-	                HatchStyle.SmallConfetti, HatchStyle.SmallGrid,
-                 HatchStyle.SolidDiamond, HatchStyle.Sphere, HatchStyle.Trellis, 
-	                HatchStyle.Vertical, HatchStyle.Wave, HatchStyle.Weave,
-                 HatchStyle.WideDownwardDiagonal, HatchStyle.WideUpwardDiagonal, HatchStyle.ZigZag
+                 System.Drawing.FontStyle.Bold,
+                 System.Drawing.FontStyle.Italic,
+                 System.Drawing.FontStyle.Regular,
+                 System.Drawing.FontStyle.Strikeout,
+                 System.Drawing.FontStyle.Underline
             };
 
-            
+            System.Drawing.Drawing2D.HatchStyle[] aHatchStyles = new System.Drawing.Drawing2D.HatchStyle[]
+            {
+                  System.Drawing.Drawing2D.HatchStyle.BackwardDiagonal
+                , System.Drawing.Drawing2D.HatchStyle.Cross
+                , System.Drawing.Drawing2D.HatchStyle.DashedDownwardDiagonal
+                , System.Drawing.Drawing2D.HatchStyle.DashedHorizontal
+                , System.Drawing.Drawing2D.HatchStyle.DashedUpwardDiagonal
+                , System.Drawing.Drawing2D.HatchStyle.DashedVertical
+                , System.Drawing.Drawing2D.HatchStyle.DiagonalBrick
+                , System.Drawing.Drawing2D.HatchStyle.DiagonalCross
+                , System.Drawing.Drawing2D.HatchStyle.Divot
+                , System.Drawing.Drawing2D.HatchStyle.DottedDiamond
+                , System.Drawing.Drawing2D.HatchStyle.DottedGrid
+                , System.Drawing.Drawing2D.HatchStyle.ForwardDiagonal
+                , System.Drawing.Drawing2D.HatchStyle.Horizontal
+                , System.Drawing.Drawing2D.HatchStyle.HorizontalBrick
+                , System.Drawing.Drawing2D.HatchStyle.LargeCheckerBoard
+                , System.Drawing.Drawing2D.HatchStyle.LargeConfetti
+                , System.Drawing.Drawing2D.HatchStyle.LargeGrid
+                , System.Drawing.Drawing2D.HatchStyle.LightDownwardDiagonal
+                , System.Drawing.Drawing2D.HatchStyle.LightHorizontal
+                , System.Drawing.Drawing2D.HatchStyle.LightUpwardDiagonal
+                , System.Drawing.Drawing2D.HatchStyle.LightVertical
+                , System.Drawing.Drawing2D.HatchStyle.Max
+                , System.Drawing.Drawing2D.HatchStyle.Min
+                , System.Drawing.Drawing2D.HatchStyle.NarrowHorizontal
+                , System.Drawing.Drawing2D.HatchStyle.NarrowVertical
+                , System.Drawing.Drawing2D.HatchStyle.OutlinedDiamond
+                , System.Drawing.Drawing2D.HatchStyle.Plaid
+                , System.Drawing.Drawing2D.HatchStyle.Shingle
+                , System.Drawing.Drawing2D.HatchStyle.SmallCheckerBoard
+                , System.Drawing.Drawing2D.HatchStyle.SmallConfetti
+                , System.Drawing.Drawing2D.HatchStyle.SmallGrid
+                , System.Drawing.Drawing2D.HatchStyle.SolidDiamond
+                , System.Drawing.Drawing2D.HatchStyle.Sphere
+                , System.Drawing.Drawing2D.HatchStyle.Trellis
+                , System.Drawing.Drawing2D.HatchStyle.Vertical
+                , System.Drawing.Drawing2D.HatchStyle.Wave
+                , System.Drawing.Drawing2D.HatchStyle.Weave
+                , System.Drawing.Drawing2D.HatchStyle.WideDownwardDiagonal
+                , System.Drawing.Drawing2D.HatchStyle.WideUpwardDiagonal
+                , System.Drawing.Drawing2D.HatchStyle.ZigZag
+            };
+
+
 
             //Creates an output Bitmap
-            Bitmap oOutputBitmap = new Bitmap(iWidth, iHeight, PixelFormat.Format24bppRgb);
-            Graphics oGraphics = Graphics.FromImage(oOutputBitmap);
-            oGraphics.TextRenderingHint = TextRenderingHint.AntiAlias;
+            System.Drawing.Bitmap oOutputBitmap = new System.Drawing.Bitmap(iWidth, iHeight
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+
+            System.Drawing.Graphics oGraphics = System.Drawing.Graphics.FromImage(oOutputBitmap);
+            oGraphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 
             //Create a Drawing area
-            RectangleF oRectangleF = new RectangleF(0, 0, iWidth, iHeight);
-            Brush oBrush = default(Brush);
+            System.Drawing.RectangleF oRectangleF = 
+                new System.Drawing.RectangleF(0, 0, iWidth, iHeight);
+            System.Drawing.Brush oBrush = default(System.Drawing.Brush);
 
 
             //Draw background (Lighter colors RGB 100 to 255)
-            oBrush = new HatchBrush(
+            oBrush = new System.Drawing.Drawing2D.HatchBrush(
                  aHatchStyles[oRandom.Next(aHatchStyles.Length - 1)]
-                , Color.FromArgb
+                , System.Drawing.Color.FromArgb
                 (
                      oRandom.Next(100, 255)
                     ,oRandom.Next(100, 255)
                     ,oRandom.Next(100, 255)
                 )
-                , Color.White
+                , System.Drawing.Color.White
             );
 
             oGraphics.FillRectangle(oBrush, oRectangleF);
@@ -132,7 +153,7 @@ namespace Captcha
                 int y = iHeight / 2;
 
                 //Rotate text Random
-                oMatrix.RotateAt(oRandom.Next(-40, 40), new PointF(x, y));
+                oMatrix.RotateAt(oRandom.Next(-40, 40), new System.Drawing.PointF(x, y));
                 oGraphics.Transform = oMatrix;
 
                 //Draw the letters with Random Font Type, Size and Color
@@ -141,25 +162,28 @@ namespace Captcha
                     //Text
                     sCaptchaText.Substring(i, 1),
                         //Random Font Name and Style
-                    new Font(aFontNames[oRandom.Next(aFontNames.Length - 1)],
+                    new System.Drawing.Font(aFontNames[oRandom.Next(aFontNames.Length - 1)],
                        aFontEmSizes[oRandom.Next(aFontEmSizes.Length - 1)],
                        aFontStyles[oRandom.Next(aFontStyles.Length - 1)]),
                         //Random Color (Darker colors RGB 0 to 100)
-                    new SolidBrush(Color.FromArgb(oRandom.Next(0, 100),
-                       oRandom.Next(0, 100), oRandom.Next(0, 100))),
-                    x,
-                    oRandom.Next(10, 40)
+                    new System.Drawing.SolidBrush(
+                        System.Drawing.Color.FromArgb(
+                             oRandom.Next(0, 100)
+                            ,oRandom.Next(0, 100)
+                            ,oRandom.Next(0, 100)))
+                            ,x
+                            ,oRandom.Next(10, 40)
                 );
                 oGraphics.ResetTransform();
             }
 
             byte[] captchaBytes = null;
 
-            using (MemoryStream oMemoryStream = new MemoryStream())
+            using (System.IO.MemoryStream oMemoryStream = new System.IO.MemoryStream())
             {
                 oOutputBitmap.Save(oMemoryStream, format);
                 captchaBytes = oMemoryStream.GetBuffer();
-            }
+            } // End Using oMemoryStream 
 
             return captchaBytes;
         }

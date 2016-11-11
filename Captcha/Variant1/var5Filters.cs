@@ -1,9 +1,4 @@
 ﻿
-using System;
-using System.Drawing;
-using System.Drawing.Imaging;
-
-
 namespace CSharpFilters
 {
 
@@ -33,10 +28,13 @@ namespace CSharpFilters
 		public const short EDGE_DETECT_PREWITT		= 2;
 		public const short EDGE_DETECT_SOBEL		= 3;
 
-		public static bool Invert(Bitmap b)
+		public static bool Invert(System.Drawing.Bitmap b)
 		{
-			// GDI+ still lies to us - the return format is BGR, NOT RGB.
-			BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            // GDI+ still lies to us - the return format is BGR, NOT RGB.
+            System.Drawing.Imaging.BitmapData bmData = b.LockBits(
+                new System.Drawing.Rectangle(0, 0, b.Width, b.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 
 			int stride = bmData.Stride;
 			System.IntPtr Scan0 = bmData.Scan0;
@@ -64,10 +62,13 @@ namespace CSharpFilters
 			return true;
 		}
 
-		public static bool GrayScale(Bitmap b)
+		public static bool GrayScale(System.Drawing.Bitmap b)
 		{
-			// GDI+ still lies to us - the return format is BGR, NOT RGB.
-			BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            // GDI+ still lies to us - the return format is BGR, NOT RGB.
+            System.Drawing.Imaging.BitmapData bmData = b.LockBits(
+                new System.Drawing.Rectangle(0, 0, b.Width, b.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 
 			int stride = bmData.Stride;
 			System.IntPtr Scan0 = bmData.Scan0;
@@ -101,13 +102,16 @@ namespace CSharpFilters
 			return true;
 		}
 
-		public static bool Brightness(Bitmap b, int nBrightness)
+		public static bool Brightness(System.Drawing.Bitmap b, int nBrightness)
 		{
 			if (nBrightness < -255 || nBrightness > 255)
 				return false;
 
-			// GDI+ still lies to us - the return format is BGR, NOT RGB.
-			BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            // GDI+ still lies to us - the return format is BGR, NOT RGB.
+            System.Drawing.Imaging.BitmapData bmData = b.LockBits(
+                new System.Drawing.Rectangle(0, 0, b.Width, b.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 
 			int stride = bmData.Stride;
 			System.IntPtr Scan0 = bmData.Scan0;
@@ -143,7 +147,7 @@ namespace CSharpFilters
 			return true;
 		}
 
-		public static bool Contrast(Bitmap b, sbyte nContrast)
+		public static bool Contrast(System.Drawing.Bitmap b, sbyte nContrast)
 		{
 			if (nContrast < -100) return false;
 			if (nContrast >  100) return false;
@@ -153,9 +157,12 @@ namespace CSharpFilters
 			contrast *= contrast;
 
 			int red, green, blue;
-			
-			// GDI+ still lies to us - the return format is BGR, NOT RGB.
-			BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+
+            // GDI+ still lies to us - the return format is BGR, NOT RGB.
+            System.Drawing.Imaging.BitmapData bmData = b.LockBits(
+                new System.Drawing.Rectangle(0, 0, b.Width, b.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 
 			int stride = bmData.Stride;
 			System.IntPtr Scan0 = bmData.Scan0;
@@ -212,7 +219,7 @@ namespace CSharpFilters
 			return true;
 		}
 	
-		public static bool Gamma(Bitmap b, double red, double green, double blue)
+		public static bool Gamma(System.Drawing.Bitmap b, double red, double green, double blue)
 		{
 			if (red < .2 || red > 5) return false;
 			if (green < .2 || green > 5) return false;
@@ -224,13 +231,16 @@ namespace CSharpFilters
 
 			for (int i = 0; i< 256; ++i)
 			{
-				redGamma[i] = (byte)Math.Min(255, (int)(( 255.0 * Math.Pow(i/255.0, 1.0/red)) + 0.5));
-				greenGamma[i] = (byte)Math.Min(255, (int)(( 255.0 * Math.Pow(i/255.0, 1.0/green)) + 0.5));
-				blueGamma[i] = (byte)Math.Min(255, (int)(( 255.0 * Math.Pow(i/255.0, 1.0/blue)) + 0.5));
+				redGamma[i] = (byte)System.Math.Min(255, (int)(( 255.0 * System.Math.Pow(i/255.0, 1.0/red)) + 0.5));
+				greenGamma[i] = (byte)System.Math.Min(255, (int)(( 255.0 * System.Math.Pow(i/255.0, 1.0/green)) + 0.5));
+				blueGamma[i] = (byte)System.Math.Min(255, (int)(( 255.0 * System.Math.Pow(i/255.0, 1.0/blue)) + 0.5));
 			}
 
-			// GDI+ still lies to us - the return format is BGR, NOT RGB.
-			BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            // GDI+ still lies to us - the return format is BGR, NOT RGB.
+            System.Drawing.Imaging.BitmapData bmData = b.LockBits(
+                new System.Drawing.Rectangle(0, 0, b.Width, b.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 
 			int stride = bmData.Stride;
 			System.IntPtr Scan0 = bmData.Scan0;
@@ -260,14 +270,17 @@ namespace CSharpFilters
 			return true;
 		}
 
-		public static bool Color(Bitmap b, int red, int green, int blue)
+		public static bool Color(System.Drawing.Bitmap b, int red, int green, int blue)
 		{
 			if (red < -255 || red > 255) return false;
 			if (green < -255 || green > 255) return false;
 			if (blue < -255 || blue > 255) return false;
 
-			// GDI+ still lies to us - the return format is BGR, NOT RGB.
-			BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            // GDI+ still lies to us - the return format is BGR, NOT RGB.
+            System.Drawing.Imaging.BitmapData bmData = b.LockBits(
+                new System.Drawing.Rectangle(0, 0, b.Width, b.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 
 			int stride = bmData.Stride;
 			System.IntPtr Scan0 = bmData.Scan0;
@@ -284,16 +297,16 @@ namespace CSharpFilters
 					for(int x=0; x < b.Width; ++x )
 					{
 						nPixel = p[2] + red;
-						nPixel = Math.Max(nPixel, 0);
-						p[2] = (byte)Math.Min(255, nPixel);
+						nPixel = System.Math.Max(nPixel, 0);
+						p[2] = (byte)System.Math.Min(255, nPixel);
 
 						nPixel = p[1] + green;
-						nPixel = Math.Max(nPixel, 0);
-						p[1] = (byte)Math.Min(255, nPixel);
+						nPixel = System.Math.Max(nPixel, 0);
+						p[1] = (byte)System.Math.Min(255, nPixel);
 
 						nPixel = p[0] + blue;
-						nPixel = Math.Max(nPixel, 0);
-						p[0] = (byte)Math.Min(255, nPixel);
+						nPixel = System.Math.Max(nPixel, 0);
+						p[0] = (byte)System.Math.Min(255, nPixel);
 
 						p += 3;
 					}
@@ -306,16 +319,23 @@ namespace CSharpFilters
 			return true;
 		}
 
-		public static bool Conv3x3(Bitmap b, ConvMatrix m)
+		public static bool Conv3x3(System.Drawing.Bitmap b, ConvMatrix m)
 		{
 			// Avoid divide by zero errors
 			if (0 == m.Factor) return false;
 
-			Bitmap bSrc = (Bitmap)b.Clone(); 
+            System.Drawing.Bitmap bSrc = (System.Drawing.Bitmap)b.Clone();
 
-			// GDI+ still lies to us - the return format is BGR, NOT RGB.
-			BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-			BitmapData bmSrc = bSrc.LockBits(new Rectangle(0, 0, bSrc.Width, bSrc.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            // GDI+ still lies to us - the return format is BGR, NOT RGB.
+            System.Drawing.Imaging.BitmapData bmData = b.LockBits(
+                new System.Drawing.Rectangle(0, 0, b.Width, b.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+
+            System.Drawing.Imaging.BitmapData bmSrc = bSrc.LockBits(
+                new System.Drawing.Rectangle(0, 0, bSrc.Width, bSrc.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 
 			int stride = bmData.Stride;
 			int stride2 = stride * 2;
@@ -378,7 +398,7 @@ namespace CSharpFilters
 			return true;
 		}
 
-		public static bool Smooth(Bitmap b, int nWeight /* default to 1 */)
+		public static bool Smooth(System.Drawing.Bitmap b, int nWeight /* default to 1 */)
 		{
 			ConvMatrix m = new ConvMatrix();
 			m.SetAll(1);
@@ -388,7 +408,7 @@ namespace CSharpFilters
 			return  BitmapFilter.Conv3x3(b, m);
 		}
 
-		public static bool GaussianBlur(Bitmap b, int nWeight /* default to 4*/)
+		public static bool GaussianBlur(System.Drawing.Bitmap b, int nWeight /* default to 4*/)
 		{
 			ConvMatrix m = new ConvMatrix();
 			m.SetAll(1);
@@ -398,7 +418,7 @@ namespace CSharpFilters
 
 			return  BitmapFilter.Conv3x3(b, m);
 		}
-		public static bool MeanRemoval(Bitmap b, int nWeight /* default to 9*/ )
+		public static bool MeanRemoval(System.Drawing.Bitmap b, int nWeight /* default to 9*/ )
 		{
 			ConvMatrix m = new ConvMatrix();
 			m.SetAll(-1);
@@ -407,7 +427,7 @@ namespace CSharpFilters
 
 			return BitmapFilter.Conv3x3(b, m);
 		}
-		public static bool Sharpen(Bitmap b, int nWeight /* default to 11*/ )
+		public static bool Sharpen(System.Drawing.Bitmap b, int nWeight /* default to 11*/ )
 		{
 			ConvMatrix m = new ConvMatrix();
 			m.SetAll(0);
@@ -417,7 +437,7 @@ namespace CSharpFilters
 
 			return  BitmapFilter.Conv3x3(b, m);
 		}
-		public static bool EmbossLaplacian(Bitmap b)
+		public static bool EmbossLaplacian(System.Drawing.Bitmap b)
 		{
 			ConvMatrix m = new ConvMatrix();
 			m.SetAll(-1);
@@ -427,7 +447,7 @@ namespace CSharpFilters
 
 			return  BitmapFilter.Conv3x3(b, m);
 		}	
-		public static bool EdgeDetectQuick(Bitmap b)
+		public static bool EdgeDetectQuick(System.Drawing.Bitmap b)
 		{
 			ConvMatrix m = new ConvMatrix();
 			m.TopLeft = m.TopMid = m.TopRight = -1;
@@ -439,12 +459,12 @@ namespace CSharpFilters
 			return  BitmapFilter.Conv3x3(b, m);
 		}
 
-		public static bool EdgeDetectConvolution(Bitmap b, short nType, byte nThreshold)
+		public static bool EdgeDetectConvolution(System.Drawing.Bitmap b, short nType, byte nThreshold)
 		{
 			ConvMatrix m = new ConvMatrix();
 
-			// I need to make a copy of this bitmap BEFORE I alter it 80)
-			Bitmap bTemp = (Bitmap)b.Clone();
+            // I need to make a copy of this bitmap BEFORE I alter it 80)
+            System.Drawing.Bitmap bTemp = (System.Drawing.Bitmap)b.Clone();
 
 			switch (nType)
 			{
@@ -498,9 +518,16 @@ namespace CSharpFilters
 
 			BitmapFilter.Conv3x3(bTemp, m);
 
-			// GDI+ still lies to us - the return format is BGR, NOT RGB.
-			BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-			BitmapData bmData2 = bTemp.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            // GDI+ still lies to us - the return format is BGR, NOT RGB.
+            System.Drawing.Imaging.BitmapData bmData = b.LockBits(
+                new System.Drawing.Rectangle(0, 0, b.Width, b.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+
+            System.Drawing.Imaging.BitmapData bmData2 = bTemp.LockBits(
+                new System.Drawing.Rectangle(0, 0, b.Width, b.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 
 			int stride = bmData.Stride;
 			System.IntPtr Scan0 = bmData.Scan0;
@@ -520,7 +547,7 @@ namespace CSharpFilters
 				{
 					for(int x=0; x < nWidth; ++x )
 					{
-						nPixel = (int) Math.Sqrt((p[0]*p[0]) + (p2[0] * p2[0]));
+						nPixel = (int)System.Math.Sqrt((p[0]*p[0]) + (p2[0] * p2[0]));
 						if (nPixel<nThreshold)nPixel = nThreshold;
 						if (nPixel>255) nPixel = 255;
 						p[0] = (byte) nPixel;
@@ -538,13 +565,20 @@ namespace CSharpFilters
 			return true;
 		}
 	
-		public static bool EdgeDetectHorizontal(Bitmap b)
+		public static bool EdgeDetectHorizontal(System.Drawing.Bitmap b)
 		{
-			Bitmap bmTemp = (Bitmap)b.Clone();
+            System.Drawing.Bitmap bmTemp = (System.Drawing.Bitmap)b.Clone();
 
-			// GDI+ still lies to us - the return format is BGR, NOT RGB.
-			BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-			BitmapData bmData2 = bmTemp.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            // GDI+ still lies to us - the return format is BGR, NOT RGB.
+            System.Drawing.Imaging.BitmapData bmData = b.LockBits(
+                new System.Drawing.Rectangle(0, 0, b.Width, b.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+
+            System.Drawing.Imaging.BitmapData bmData2 = bmTemp.LockBits(
+                new System.Drawing.Rectangle(0, 0, b.Width, b.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 
 			int stride = bmData.Stride;
 			System.IntPtr Scan0 = bmData.Scan0;
@@ -605,13 +639,20 @@ namespace CSharpFilters
 			return true;
 		}
 
-		public static bool EdgeDetectVertical(Bitmap b)
+		public static bool EdgeDetectVertical(System.Drawing.Bitmap b)
 		{
-			Bitmap bmTemp = (Bitmap)b.Clone();
+            System.Drawing.Bitmap bmTemp = (System.Drawing.Bitmap)b.Clone();
 
-			// GDI+ still lies to us - the return format is BGR, NOT RGB.
-			BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-			BitmapData bmData2 = bmTemp.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            // GDI+ still lies to us - the return format is BGR, NOT RGB.
+            System.Drawing.Imaging.BitmapData bmData = b.LockBits(
+                new System.Drawing.Rectangle(0, 0, b.Width, b.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+
+            System.Drawing.Imaging.BitmapData bmData2 = bmTemp.LockBits(
+                new System.Drawing.Rectangle(0, 0, b.Width, b.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 
 			int stride = bmData.Stride;
 			System.IntPtr Scan0 = bmData.Scan0;
@@ -675,15 +716,22 @@ namespace CSharpFilters
 			return true;
 		}
 
-		public static bool EdgeDetectHomogenity(Bitmap b, byte nThreshold)
+		public static bool EdgeDetectHomogenity(System.Drawing.Bitmap b, byte nThreshold)
 		{
-			// This one works by working out the greatest difference between a pixel and it's eight neighbours.
-			// The threshold allows softer edges to be forced down to black, use 0 to negate it's effect.
-			Bitmap b2 = (Bitmap) b.Clone();
+            // This one works by working out the greatest difference between a pixel and it's eight neighbours.
+            // The threshold allows softer edges to be forced down to black, use 0 to negate it's effect.
+            System.Drawing.Bitmap b2 = (System.Drawing.Bitmap) b.Clone();
 
-			// GDI+ still lies to us - the return format is BGR, NOT RGB.
-			BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-			BitmapData bmData2 = b2.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            // GDI+ still lies to us - the return format is BGR, NOT RGB.
+            System.Drawing.Imaging.BitmapData bmData = b.LockBits(
+                new System.Drawing.Rectangle(0, 0, b.Width, b.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+
+            System.Drawing.Imaging.BitmapData bmData2 = b2.LockBits(
+                new System.Drawing.Rectangle(0, 0, b.Width, b.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 
 			int stride = bmData.Stride;
 			System.IntPtr Scan0 = bmData.Scan0;
@@ -709,26 +757,26 @@ namespace CSharpFilters
 
 					for(int x=3; x < nWidth-3; ++x )
 					{
-						nPixelMax = Math.Abs(p2[0] - (p2+stride-3)[0]);
-						nPixel = Math.Abs(p2[0] - (p2 + stride)[0]);
+						nPixelMax = System.Math.Abs(p2[0] - (p2+stride-3)[0]);
+						nPixel = System.Math.Abs(p2[0] - (p2 + stride)[0]);
 						if (nPixel>nPixelMax) nPixelMax = nPixel;
 
-						nPixel = Math.Abs(p2[0] - (p2 + stride + 3)[0]);
+						nPixel = System.Math.Abs(p2[0] - (p2 + stride + 3)[0]);
 						if (nPixel>nPixelMax) nPixelMax = nPixel;
 
-						nPixel = Math.Abs(p2[0] - (p2 - stride)[0]);
+						nPixel = System.Math.Abs(p2[0] - (p2 - stride)[0]);
 						if (nPixel>nPixelMax) nPixelMax = nPixel;
 
-						nPixel = Math.Abs(p2[0] - (p2 + stride)[0]);
+						nPixel = System.Math.Abs(p2[0] - (p2 + stride)[0]);
 						if (nPixel>nPixelMax) nPixelMax = nPixel;
 
-						nPixel = Math.Abs(p2[0] - (p2 - stride - 3)[0]);
+						nPixel = System.Math.Abs(p2[0] - (p2 - stride - 3)[0]);
 						if (nPixel>nPixelMax) nPixelMax = nPixel;
 
-						nPixel = Math.Abs(p2[0] - (p2 - stride)[0]);
+						nPixel = System.Math.Abs(p2[0] - (p2 - stride)[0]);
 						if (nPixel>nPixelMax) nPixelMax = nPixel;
 
-						nPixel = Math.Abs(p2[0] - (p2 - stride + 3)[0]);
+						nPixel = System.Math.Abs(p2[0] - (p2 - stride + 3)[0]);
 						if (nPixel>nPixelMax) nPixelMax = nPixel;
 
 						if (nPixelMax < nThreshold) nPixelMax = 0;
@@ -750,15 +798,22 @@ namespace CSharpFilters
 			return true;
             
 		}
-		public static bool EdgeDetectDifference(Bitmap b, byte nThreshold)
+		public static bool EdgeDetectDifference(System.Drawing.Bitmap b, byte nThreshold)
 		{
-			// This one works by working out the greatest difference between a pixel and it's eight neighbours.
-			// The threshold allows softer edges to be forced down to black, use 0 to negate it's effect.
-			Bitmap b2 = (Bitmap) b.Clone();
+            // This one works by working out the greatest difference between a pixel and it's eight neighbours.
+            // The threshold allows softer edges to be forced down to black, use 0 to negate it's effect.
+            System.Drawing.Bitmap b2 = (System.Drawing.Bitmap) b.Clone();
 
-			// GDI+ still lies to us - the return format is BGR, NOT RGB.
-			BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-			BitmapData bmData2 = b2.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            // GDI+ still lies to us - the return format is BGR, NOT RGB.
+            System.Drawing.Imaging.BitmapData bmData = b.LockBits(
+                new System.Drawing.Rectangle(0, 0, b.Width, b.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+
+            System.Drawing.Imaging.BitmapData bmData2 = b2.LockBits(
+                new System.Drawing.Rectangle(0, 0, b.Width, b.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 
 			int stride = bmData.Stride;
 			System.IntPtr Scan0 = bmData.Scan0;
@@ -784,14 +839,14 @@ namespace CSharpFilters
 
 					for(int x=3; x < nWidth-3; ++x )
 					{
-						nPixelMax = Math.Abs((p2 - stride + 3)[0] - (p2+stride-3)[0]);
-						nPixel = Math.Abs((p2 + stride + 3)[0] - (p2 - stride - 3)[0]);
+						nPixelMax = System.Math.Abs((p2 - stride + 3)[0] - (p2+stride-3)[0]);
+						nPixel = System.Math.Abs((p2 + stride + 3)[0] - (p2 - stride - 3)[0]);
 						if (nPixel>nPixelMax) nPixelMax = nPixel;
 
-						nPixel = Math.Abs((p2 - stride)[0] - (p2 + stride)[0]);
+						nPixel = System.Math.Abs((p2 - stride)[0] - (p2 + stride)[0]);
 						if (nPixel>nPixelMax) nPixelMax = nPixel;
 
-						nPixel = Math.Abs((p2+3)[0] - (p2 - 3)[0]);
+						nPixel = System.Math.Abs((p2+3)[0] - (p2 - 3)[0]);
 						if (nPixel>nPixelMax) nPixelMax = nPixel;
 
 						if (nPixelMax < nThreshold) nPixelMax = 0;
@@ -814,15 +869,22 @@ namespace CSharpFilters
             
 		}
 
-		public static bool EdgeEnhance(Bitmap b, byte nThreshold)
+		public static bool EdgeEnhance(System.Drawing.Bitmap b, byte nThreshold)
 		{
-			// This one works by working out the greatest difference between a nPixel and it's eight neighbours.
-			// The threshold allows softer edges to be forced down to black, use 0 to negate it's effect.
-			Bitmap b2 = (Bitmap) b.Clone();
+            // This one works by working out the greatest difference between a nPixel and it's eight neighbours.
+            // The threshold allows softer edges to be forced down to black, use 0 to negate it's effect.
+            System.Drawing.Bitmap b2 = (System.Drawing.Bitmap) b.Clone();
 
-			// GDI+ still lies to us - the return format is BGR, NOT RGB.
-			BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-			BitmapData bmData2 = b2.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            // GDI+ still lies to us - the return format is BGR, NOT RGB.
+            System.Drawing.Imaging.BitmapData bmData = b.LockBits(
+                new System.Drawing.Rectangle(0, 0, b.Width, b.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+
+            System.Drawing.Imaging.BitmapData bmData2 = b2.LockBits(
+                new System.Drawing.Rectangle(0, 0, b.Width, b.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 
 			int stride = bmData.Stride;
 			System.IntPtr Scan0 = bmData.Scan0;
@@ -848,22 +910,22 @@ namespace CSharpFilters
 
 					for (int x = 3; x < nWidth-3; ++x)
 					{
-						nPixelMax = Math.Abs((p2 - stride + 3)[0] - (p2 + stride - 3)[0]);
+						nPixelMax = System.Math.Abs((p2 - stride + 3)[0] - (p2 + stride - 3)[0]);
 
-						nPixel = Math.Abs((p2 + stride + 3)[0] - (p2 - stride - 3)[0]);
-
-						if (nPixel > nPixelMax) nPixelMax = nPixel;
-
-						nPixel = Math.Abs((p2 - stride)[0] - (p2 + stride)[0]);
+						nPixel = System.Math.Abs((p2 + stride + 3)[0] - (p2 - stride - 3)[0]);
 
 						if (nPixel > nPixelMax) nPixelMax = nPixel;
 
-						nPixel = Math.Abs((p2 + 3)[0] - (p2 - 3)[0]);
+						nPixel = System.Math.Abs((p2 - stride)[0] - (p2 + stride)[0]);
+
+						if (nPixel > nPixelMax) nPixelMax = nPixel;
+
+						nPixel = System.Math.Abs((p2 + 3)[0] - (p2 - 3)[0]);
 
 						if (nPixel > nPixelMax) nPixelMax = nPixel;
 
 						if (nPixelMax > nThreshold && nPixelMax > p[0])
-							p[0] = (byte) Math.Max(p[0], nPixelMax);
+							p[0] = (byte)System.Math.Max(p[0], nPixelMax);
 
 						++ p;
 						++ p2;			
@@ -879,10 +941,10 @@ namespace CSharpFilters
 
 			return true;
 		}
-		public static Bitmap Resize(Bitmap b, int nWidth, int nHeight, bool bBilinear)
+		public static System.Drawing.Bitmap Resize(System.Drawing.Bitmap b, int nWidth, int nHeight, bool bBilinear)
 		{
-			Bitmap bTemp = (Bitmap)b.Clone();
-			b = new Bitmap(nWidth, nHeight, bTemp.PixelFormat);
+            System.Drawing.Bitmap bTemp = (System.Drawing.Bitmap)b.Clone();
+			b = new System.Drawing.Bitmap(nWidth, nHeight, bTemp.PixelFormat);
 
 			double nXFactor = (double)bTemp.Width/(double)nWidth;
 			double nYFactor = (double)bTemp.Height/(double)nHeight;
@@ -891,10 +953,10 @@ namespace CSharpFilters
 			{
 				double fraction_x, fraction_y, one_minus_x, one_minus_y;
 				int ceil_x, ceil_y, floor_x, floor_y;
-				Color c1 = new Color();
-				Color c2 = new Color();
-				Color c3 = new Color();
-				Color c4 = new Color();
+                System.Drawing.Color c1 = new System.Drawing.Color();
+                System.Drawing.Color c2 = new System.Drawing.Color();
+                System.Drawing.Color c3 = new System.Drawing.Color();
+                System.Drawing.Color c4 = new System.Drawing.Color();
 				byte red, green, blue;
 
 				byte b1, b2;
@@ -904,8 +966,8 @@ namespace CSharpFilters
 					{
 						// Setup
 
-						floor_x = (int)Math.Floor(x * nXFactor);
-						floor_y = (int)Math.Floor(y * nYFactor);
+						floor_x = (int)System.Math.Floor(x * nXFactor);
+						floor_y = (int)System.Math.Floor(y * nYFactor);
 						ceil_x = floor_x + 1;
 						if (ceil_x >= bTemp.Width) ceil_x = floor_x;
 						ceil_y = floor_y + 1;
@@ -948,19 +1010,27 @@ namespace CSharpFilters
 			{
 				for (int x = 0; x < b.Width; ++x)
 					for (int y = 0; y < b.Height; ++y)
-						b.SetPixel(x, y, bTemp.GetPixel((int)(Math.Floor(x * nXFactor)),(int)(Math.Floor(y * nYFactor))));
+						b.SetPixel(x, y, bTemp.GetPixel((int)(System.Math.Floor(x * nXFactor))
+                            ,(int)(System.Math.Floor(y * nYFactor))));
 			}
 
 			return b;
 		}
 
-		public static bool OffsetFilterAbs(Bitmap b, Point[,] offset )
+		public static bool OffsetFilterAbs(System.Drawing.Bitmap b, System.Drawing.Point[,] offset )
 		{
-			Bitmap bSrc = (Bitmap)b.Clone(); 
+            System.Drawing.Bitmap bSrc = (System.Drawing.Bitmap)b.Clone();
 
-			// GDI+ still lies to us - the return format is BGR, NOT RGB.
-			BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-			BitmapData bmSrc = bSrc.LockBits(new Rectangle(0, 0, bSrc.Width, bSrc.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            // GDI+ still lies to us - the return format is BGR, NOT RGB.
+            System.Drawing.Imaging.BitmapData bmData = b.LockBits(
+                new System.Drawing.Rectangle(0, 0, b.Width, b.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+
+            System.Drawing.Imaging.BitmapData bmSrc = bSrc.LockBits(
+                new System.Drawing.Rectangle(0, 0, bSrc.Width, bSrc.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 
 			int scanline = bmData.Stride;
 
@@ -1004,13 +1074,20 @@ namespace CSharpFilters
 			return true;
 		}
 
-		public static bool OffsetFilter(Bitmap b, Point[,] offset )
+		public static bool OffsetFilter(System.Drawing.Bitmap b, System.Drawing.Point[,] offset )
 		{
-			Bitmap bSrc = (Bitmap)b.Clone(); 
+            System.Drawing.Bitmap bSrc = (System.Drawing.Bitmap)b.Clone();
 
-			// GDI+ still lies to us - the return format is BGR, NOT RGB.
-			BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-			BitmapData bmSrc = bSrc.LockBits(new Rectangle(0, 0, bSrc.Width, bSrc.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            // GDI+ still lies to us - the return format is BGR, NOT RGB.
+            System.Drawing.Imaging.BitmapData bmData = b.LockBits(
+                new System.Drawing.Rectangle(0, 0, b.Width, b.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+
+            System.Drawing.Imaging.BitmapData bmSrc = bSrc.LockBits(
+                new System.Drawing.Rectangle(0, 0, bSrc.Width, bSrc.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 
 			int scanline = bmData.Stride;
 
@@ -1054,13 +1131,20 @@ namespace CSharpFilters
 			return true;
 		}
 
-		public static bool OffsetFilterAntiAlias(Bitmap b, FloatPoint[,] fp)
+		public static bool OffsetFilterAntiAlias(System.Drawing.Bitmap b, FloatPoint[,] fp)
 		{
-			Bitmap bSrc = (Bitmap)b.Clone(); 
+            System.Drawing.Bitmap bSrc = (System.Drawing.Bitmap)b.Clone();
 
-			// GDI+ still lies to us - the return format is BGR, NOT RGB.
-			BitmapData bmData = b.LockBits(new Rectangle(0, 0, b.Width, b.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-			BitmapData bmSrc = bSrc.LockBits(new Rectangle(0, 0, bSrc.Width, bSrc.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            // GDI+ still lies to us - the return format is BGR, NOT RGB.
+            System.Drawing.Imaging.BitmapData bmData = b.LockBits(
+                new System.Drawing.Rectangle(0, 0, b.Width, b.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+
+            System.Drawing.Imaging.BitmapData bmSrc = bSrc.LockBits(
+                new System.Drawing.Rectangle(0, 0, bSrc.Width, bSrc.Height)
+                , System.Drawing.Imaging.ImageLockMode.ReadWrite
+                , System.Drawing.Imaging.PixelFormat.Format24bppRgb);
 
 			int scanline = bmData.Stride;
 
@@ -1080,7 +1164,7 @@ namespace CSharpFilters
 
 				double fraction_x, fraction_y, one_minus_x, one_minus_y;
 				int ceil_x, ceil_y, floor_x, floor_y;
-				Byte p1, p2;
+				byte p1, p2;
 
 				for(int y=0;y < nHeight;++y)
 				{
@@ -1091,8 +1175,8 @@ namespace CSharpFilters
 				
 						// Setup
 
-						floor_x = (int)Math.Floor(xOffset);
-						floor_y = (int)Math.Floor(yOffset);
+						floor_x = (int)System.Math.Floor(xOffset);
+						floor_y = (int)System.Math.Floor(yOffset);
 						ceil_x = floor_x + 1;
 						ceil_y = floor_y + 1;
 						fraction_x = xOffset - floor_x;
@@ -1104,33 +1188,33 @@ namespace CSharpFilters
 						{
 							// Blue
 
-							p1 = (Byte)(one_minus_x * (double)(pSrc[floor_y * scanline + floor_x * 3]) +
+							p1 = (byte)(one_minus_x * (double)(pSrc[floor_y * scanline + floor_x * 3]) +
 								fraction_x * (double)(pSrc[floor_y * scanline + ceil_x * 3]));
 
-							p2 = (Byte)(one_minus_x * (double)(pSrc[ceil_y * scanline + floor_x * 3]) +
+							p2 = (byte)(one_minus_x * (double)(pSrc[ceil_y * scanline + floor_x * 3]) +
 								fraction_x * (double)(pSrc[ceil_y * scanline + 3 * ceil_x]));
 
-							p[x * 3 + y*scanline] = (Byte)(one_minus_y * (double)(p1) + fraction_y * (double)(p2));
+							p[x * 3 + y*scanline] = (byte)(one_minus_y * (double)(p1) + fraction_y * (double)(p2));
 							
 							// Green
 
-							p1 = (Byte)(one_minus_x * (double)(pSrc[floor_y * scanline + floor_x * 3 + 1]) +
+							p1 = (byte)(one_minus_x * (double)(pSrc[floor_y * scanline + floor_x * 3 + 1]) +
 								fraction_x * (double)(pSrc[floor_y * scanline + ceil_x * 3 + 1]));
 
-							p2 = (Byte)(one_minus_x * (double)(pSrc[ceil_y * scanline + floor_x * 3 + 1]) +
+							p2 = (byte)(one_minus_x * (double)(pSrc[ceil_y * scanline + floor_x * 3 + 1]) +
 								fraction_x * (double)(pSrc[ceil_y * scanline + 3 * ceil_x + 1]));
 			
-							p[x * 3 + y*scanline + 1] = (Byte)(one_minus_y * (double)(p1) + fraction_y * (double)(p2));
+							p[x * 3 + y*scanline + 1] = (byte)(one_minus_y * (double)(p1) + fraction_y * (double)(p2));
 
 							// Red
 
-							p1 = (Byte)(one_minus_x * (double)(pSrc[floor_y * scanline + floor_x * 3 + 2]) +
+							p1 = (byte)(one_minus_x * (double)(pSrc[floor_y * scanline + floor_x * 3 + 2]) +
 								fraction_x * (double)(pSrc[floor_y * scanline + ceil_x * 3 + 2]));
 
-							p2 = (Byte)(one_minus_x * (double)(pSrc[ceil_y * scanline + floor_x * 3 + 2]) +
+							p2 = (byte)(one_minus_x * (double)(pSrc[ceil_y * scanline + floor_x * 3 + 2]) +
 								fraction_x * (double)(pSrc[ceil_y * scanline + 3 * ceil_x + 2]));
 			
-							p[x * 3 + y*scanline + 2] = (Byte)(one_minus_y * (double)(p1) + fraction_y * (double)(p2));
+							p[x * 3 + y*scanline + 2] = (byte)(one_minus_y * (double)(p1) + fraction_y * (double)(p2));
 						}
 					}
 				}
@@ -1142,9 +1226,9 @@ namespace CSharpFilters
 			return true;
 		}
 
-		public static bool Flip(Bitmap b, bool bHorz, bool bVert)
+		public static bool Flip(System.Drawing.Bitmap b, bool bHorz, bool bVert)
 		{
-			Point [,] ptFlip = new Point[b.Width,b.Height]; 
+            System.Drawing.Point [,] ptFlip = new System.Drawing.Point[b.Width,b.Height]; 
 
 			int nWidth = b.Width;
 			int nHeight = b.Height;
@@ -1161,9 +1245,9 @@ namespace CSharpFilters
 			return true;
 		}
 
-		public static bool RandomJitter(Bitmap b, short nDegree)
+		public static bool RandomJitter(System.Drawing.Bitmap b, short nDegree)
 		{
-			Point [,] ptRandJitter = new Point[b.Width,b.Height]; 
+            System.Drawing.Point [,] ptRandJitter = new System.Drawing.Point[b.Width,b.Height]; 
 
 			int nWidth = b.Width;
 			int nHeight = b.Height;
@@ -1171,7 +1255,7 @@ namespace CSharpFilters
 			int newX, newY;
 
 			short nHalf = (short)System.Math.Floor((double)nDegree/2);
-			Random rnd = new Random();
+            System.Random rnd = new System.Random();
 
 			for (int x = 0; x < nWidth; ++x)
 				for (int y = 0; y < nHeight; ++y)
@@ -1195,15 +1279,15 @@ namespace CSharpFilters
 
 			return true;
 		}
-		public static bool Swirl(Bitmap b, double fDegree, bool bSmoothing /* default fDegree to .05 */)
+		public static bool Swirl(System.Drawing.Bitmap b, double fDegree, bool bSmoothing /* default fDegree to .05 */)
 		{
 			int nWidth = b.Width;
 			int nHeight = b.Height;
 
 			FloatPoint [,] fp = new FloatPoint[nWidth, nHeight];
-			Point [,] pt = new Point[nWidth, nHeight];
+            System.Drawing.Point [,] pt = new System.Drawing.Point[nWidth, nHeight];
 
-			Point mid = new Point();
+            System.Drawing.Point mid = new System.Drawing.Point();
 			mid.X = nWidth/2;
 			mid.Y = nHeight/2;
 
@@ -1215,11 +1299,11 @@ namespace CSharpFilters
 				{
 					int trueX = x - mid.X;
 					int trueY = y - mid.Y;
-					theta = Math.Atan2((trueY),(trueX));
+					theta = System.Math.Atan2((trueY),(trueX));
 
-					radius = Math.Sqrt(trueX*trueX + trueY*trueY);
+					radius = System.Math.Sqrt(trueX*trueX + trueY*trueY);
 
-					newX = mid.X + (radius * Math.Cos(theta + fDegree * radius));
+					newX = mid.X + (radius * System.Math.Cos(theta + fDegree * radius));
 					if (newX > 0 && newX < nWidth)
 					{
 						fp[x, y].X = newX;
@@ -1228,7 +1312,7 @@ namespace CSharpFilters
 					else
 						fp[x, y].X = pt[x, y].X = x;
 
-					newY = mid.Y + (radius * Math.Sin(theta + fDegree * radius));
+					newY = mid.Y + (radius * System.Math.Sin(theta + fDegree * radius));
 					if (newY > 0 && newY < nHeight)
 					{
 						fp[x, y].Y = newY;
@@ -1246,15 +1330,15 @@ namespace CSharpFilters
 			return true;
 		}
 
-		public static bool Sphere(Bitmap b, bool bSmoothing)
+		public static bool Sphere(System.Drawing.Bitmap b, bool bSmoothing)
 		{
 			int nWidth = b.Width;
 			int nHeight = b.Height;
 
 			FloatPoint [,] fp = new FloatPoint[nWidth, nHeight];
-			Point [,] pt = new Point[nWidth, nHeight];
+            System.Drawing.Point [,] pt = new System.Drawing.Point[nWidth, nHeight];
 
-			Point mid = new Point();
+            System.Drawing.Point mid = new System.Drawing.Point();
 			mid.X = nWidth/2;
 			mid.Y = nHeight/2;
 
@@ -1266,13 +1350,13 @@ namespace CSharpFilters
 				{
 					int trueX = x - mid.X;
 					int trueY = y - mid.Y;
-					theta = Math.Atan2((trueY),(trueX));
+					theta = System.Math.Atan2((trueY),(trueX));
 
-					radius = Math.Sqrt(trueX*trueX + trueY*trueY);
+					radius = System.Math.Sqrt(trueX*trueX + trueY*trueY);
 
-					double newRadius = radius * radius/(Math.Max(mid.X, mid.Y));
+					double newRadius = radius * radius/(System.Math.Max(mid.X, mid.Y));
 
-					newX = mid.X + (newRadius * Math.Cos(theta));
+					newX = mid.X + (newRadius * System.Math.Cos(theta));
 
 					if (newX > 0 && newX < nWidth)
 					{
@@ -1285,7 +1369,7 @@ namespace CSharpFilters
 						pt[x, y].X = pt[x,y].Y = 0;
 					}
 
-					newY = mid.Y + (newRadius * Math.Sin(theta));
+					newY = mid.Y + (newRadius * System.Math.Sin(theta));
 
 					if (newY > 0 && newY < nHeight && newX > 0 && newX < nWidth)
 					{
@@ -1307,15 +1391,15 @@ namespace CSharpFilters
 			return true;
 		}
 
-		public static bool TimeWarp(Bitmap b, Byte factor, bool bSmoothing)
+		public static bool TimeWarp(System.Drawing.Bitmap b, byte factor, bool bSmoothing)
 		{
 			int nWidth = b.Width;
 			int nHeight = b.Height;
 
 			FloatPoint [,] fp = new FloatPoint[nWidth, nHeight];
-			Point [,] pt = new Point[nWidth, nHeight];
+            System.Drawing.Point [,] pt = new System.Drawing.Point[nWidth, nHeight];
 
-			Point mid = new Point();
+            System.Drawing.Point mid = new System.Drawing.Point();
 			mid.X = nWidth/2;
 			mid.Y = nHeight/2;
 
@@ -1327,13 +1411,13 @@ namespace CSharpFilters
 				{
 					int trueX = x - mid.X;
 					int trueY = y - mid.Y;
-					theta = Math.Atan2((trueY),(trueX));
+					theta = System.Math.Atan2((trueY),(trueX));
 
-					radius = Math.Sqrt(trueX*trueX + trueY*trueY);
+					radius = System.Math.Sqrt(trueX*trueX + trueY*trueY);
 
-					double newRadius = Math.Sqrt(radius) * factor;
+					double newRadius = System.Math.Sqrt(radius) * factor;
 
-					newX = mid.X + (newRadius * Math.Cos(theta));
+					newX = mid.X + (newRadius * System.Math.Cos(theta));
 					if (newX > 0 && newX < nWidth)
 					{
 						fp[x, y].X = newX;
@@ -1345,7 +1429,7 @@ namespace CSharpFilters
 						pt[x, y].X = 0;
 					}
 
-					newY = mid.Y + (newRadius * Math.Sin(theta));
+					newY = mid.Y + (newRadius * System.Math.Sin(theta));
 					if (newY > 0 && newY < nHeight)
 					{
 						fp[x, y].Y = newY;
@@ -1366,14 +1450,14 @@ namespace CSharpFilters
 			return true;
 		}
 
-		public static bool Moire(Bitmap b, double fDegree)
+		public static bool Moire(System.Drawing.Bitmap b, double fDegree)
 		{
 			int nWidth = b.Width;
 			int nHeight = b.Height;
 
-			Point [,] pt = new Point[nWidth, nHeight];
+            System.Drawing.Point [,] pt = new System.Drawing.Point[nWidth, nHeight];
 
-			Point mid = new Point();
+            System.Drawing.Point mid = new System.Drawing.Point();
 			mid.X = nWidth/2;
 			mid.Y = nHeight/2;
 
@@ -1385,11 +1469,11 @@ namespace CSharpFilters
 				{
 					int trueX = x - mid.X;
 					int trueY = y - mid.Y;
-					theta = Math.Atan2((trueX),(trueY));
+					theta = System.Math.Atan2((trueX),(trueY));
 
-					radius = Math.Sqrt(trueX*trueX + trueY*trueY);
+					radius = System.Math.Sqrt(trueX*trueX + trueY*trueY);
 
-					newX = (int)(radius * Math.Sin(theta + fDegree * radius));
+					newX = (int)(radius * System.Math.Sin(theta + fDegree * radius));
 					if (newX > 0 && newX < nWidth)
 					{
 						pt[x, y].X = (int) newX;
@@ -1399,7 +1483,7 @@ namespace CSharpFilters
 						pt[x, y].X = 0;
 					}
 
-					newY = (int)(radius * Math.Sin(theta + fDegree * radius));
+					newY = (int)(radius * System.Math.Sin(theta + fDegree * radius));
 					if (newY > 0 && newY < nHeight)
 					{
 						pt[x, y].Y = (int) newY;
@@ -1415,15 +1499,15 @@ namespace CSharpFilters
 			return true;
 		}
 
-		public static bool Water(Bitmap b, short nWave, bool bSmoothing)
+		public static bool Water(System.Drawing.Bitmap b, short nWave, bool bSmoothing)
 		{
 			int nWidth = b.Width;
 			int nHeight = b.Height;
 
 			FloatPoint [,] fp = new FloatPoint[nWidth, nHeight];
-			Point [,] pt = new Point[nWidth, nHeight];
+            System.Drawing.Point [,] pt = new System.Drawing.Point[nWidth, nHeight];
 
-			Point mid = new Point();
+            System.Drawing.Point mid = new System.Drawing.Point();
 			mid.X = nWidth/2;
 			mid.Y = nHeight/2;
 
@@ -1433,8 +1517,8 @@ namespace CSharpFilters
 			for (int x = 0; x < nWidth; ++x)
 				for (int y = 0; y < nHeight; ++y)
 				{
-					xo = ((double)nWave * Math.Sin(2.0 * 3.1415 * (float)y / 128.0));
-					yo = ((double)nWave * Math.Cos(2.0 * 3.1415 * (float)x / 128.0));
+					xo = ((double)nWave * System.Math.Sin(2.0 * 3.1415 * (float)y / 128.0));
+					yo = ((double)nWave * System.Math.Cos(2.0 * 3.1415 * (float)x / 128.0));
 
 					newX = (x + xo);
 					newY = (y + yo);
@@ -1471,12 +1555,12 @@ namespace CSharpFilters
 			return true;
 		}
 
-		public static bool Pixelate(Bitmap b, short pixel, bool bGrid)
+		public static bool Pixelate(System.Drawing.Bitmap b, short pixel, bool bGrid)
 		{
 			int nWidth = b.Width;
 			int nHeight = b.Height;
 
-			Point [,] pt = new Point[nWidth, nHeight];
+            System.Drawing.Point [,] pt = new System.Drawing.Point[nWidth, nHeight];
 
 			int newX, newY;
 

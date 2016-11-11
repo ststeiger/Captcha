@@ -1,27 +1,11 @@
 ﻿
-
 /*
  * RNCaptcha
- * 
  * version 1.0
- * 
  * Copyright (c) 2014, Roger Ngo <rogerngo90@gmail.com>
- * 
  * GPL License
  * http://www.gnu.org/licenses/gpl.html
- * 
  */
-
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Drawing.Drawing2D;
-using System.IO;
 
 
 // https://rogerngo.wordpress.com/2014/05/11/creating-a-simple-captcha-in-net/
@@ -58,7 +42,7 @@ namespace Captcha
             string universe = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@$#%^&*";
             string result = "";
 
-            Random rand = new Random();
+            System.Random rand = new System.Random();
 
             for (int i = 0; i < 8; i++)
             {
@@ -72,7 +56,7 @@ namespace Captcha
 
         public static string GenerateMarkup(string captchaInput)
         {
-            StringBuilder html = new StringBuilder();
+            System.Text.StringBuilder html = new System.Text.StringBuilder();
 
             html.AppendFormat("<img src=\"data:image/png;base64,{0}\" />", captchaInput);
 
@@ -83,24 +67,25 @@ namespace Captcha
         {
             string retVal = null;
 
-            using (Bitmap bmp = new Bitmap(this.width, this.height))
+            using (System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(this.width, this.height))
             {
-                using (Graphics g = Graphics.FromImage(bmp))
+                using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(bmp))
                 {
-                    g.Clear(Color.FromArgb(240, 240, 240));
-                    g.SmoothingMode = SmoothingMode.AntiAlias;
-                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                    g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                    g.Clear(System.Drawing.Color.FromArgb(240, 240, 240));
+                    g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                    g.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.HighQuality;
 
-                    using (Font fo = new Font("Tahoma", this.fontSize, FontStyle.Bold ^ FontStyle.Italic))
+                    using (System.Drawing.Font fo = new System.Drawing.Font("Tahoma", this.fontSize
+                        , System.Drawing.FontStyle.Bold ^ System.Drawing.FontStyle.Italic))
                     {
                         // using (System.Drawing.Brush cfb = Brushes.CornflowerBlue) // Framework-Bug...
-                        RectangleF rect = new RectangleF(8, 5, 0, 0);
-                        g.DrawString(this.answer, fo, Brushes.CornflowerBlue, rect);
+                        System.Drawing.RectangleF rect = new System.Drawing.RectangleF(8, 5, 0, 0);
+                        g.DrawString(this.answer, fo, System.Drawing.Brushes.CornflowerBlue, rect);
                     } // End Using fo 
 
 
-                    Random rand = new Random();
+                    System.Random rand = new System.Random();
 
                     for (int i = 0; i < 10; i++)
                     {
@@ -109,7 +94,10 @@ namespace Captcha
                         int x1 = rand.Next(0, this.width);
                         int y1 = rand.Next(0, this.height);
 
-                        using (System.Drawing.Pen p = new Pen(Color.FromArgb(192, 75, 75, 75)))
+                        using (System.Drawing.Pen p = new System.Drawing.Pen(
+                            System.Drawing.Color.FromArgb(192, 75, 75, 75)
+                            )
+                            )
                         {
                             g.DrawLine(p, x0, y0, x1, y1);
                         } // End Using p 
@@ -124,7 +112,10 @@ namespace Captcha
                         int x1 = rand.Next(0, this.width);
                         int y1 = rand.Next(0, this.height);
 
-                        using (System.Drawing.Pen p = new Pen(Color.FromArgb(192, 125, 75, 255)))
+                        using (System.Drawing.Pen p = new System.Drawing.Pen(
+                            System.Drawing.Color.FromArgb(192, 125, 75, 255)
+                            )
+                            )
                         {
                             g.DrawLine(p, x0, y0, x1, y1);
                         } // End Using p 
@@ -132,10 +123,10 @@ namespace Captcha
                     } // Next i 
 
 
-                    using (MemoryStream mem = new MemoryStream())
+                    using (System.IO.MemoryStream mem = new System.IO.MemoryStream())
                     {
-                        bmp.Save(mem, ImageFormat.Png);
-                        retVal = Convert.ToBase64String(mem.ToArray());
+                        bmp.Save(mem, System.Drawing.Imaging.ImageFormat.Png);
+                        retVal = System.Convert.ToBase64String(mem.ToArray());
                     } // End Using ms 
 
                 } // End Using g 

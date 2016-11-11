@@ -59,6 +59,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.btnVariant1);
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

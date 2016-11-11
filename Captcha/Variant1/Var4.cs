@@ -1,11 +1,4 @@
 ﻿
-using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.Drawing.Text;
-
-
 // http://www.codeproject.com/Articles/5947/CAPTCHA-Image
 namespace Captcha
 {
@@ -21,7 +14,7 @@ namespace Captcha
         {
             get { return this.text; }
         }
-        public Bitmap Image
+        public System.Drawing.Bitmap Image
         {
             get { return this.image; }
         }
@@ -39,10 +32,10 @@ namespace Captcha
         private int width;
         private int height;
         private string familyName;
-        private Bitmap image;
+        private System.Drawing.Bitmap image;
 
         // For generating random numbers.
-        private Random random = new Random();
+        private System.Random random = new System.Random();
 
         // ====================================================================
         // Initializes a new instance of the CaptchaImage class using the
@@ -80,7 +73,7 @@ namespace Captcha
         // ====================================================================
         public void Dispose()
         {
-            GC.SuppressFinalize(this);
+            System.GC.SuppressFinalize(this);
             this.Dispose(true);
         }
 
@@ -101,9 +94,9 @@ namespace Captcha
         {
             // Check the width and height.
             if (width <= 0)
-                throw new ArgumentOutOfRangeException("width", width, "Argument out of range, must be greater than zero.");
+                throw new System.ArgumentOutOfRangeException("width", width, "Argument out of range, must be greater than zero.");
             if (height <= 0)
-                throw new ArgumentOutOfRangeException("height", height, "Argument out of range, must be greater than zero.");
+                throw new System.ArgumentOutOfRangeException("height", height, "Argument out of range, must be greater than zero.");
             this.width = width;
             this.height = height;
         }
@@ -116,11 +109,11 @@ namespace Captcha
             // If the named font is not installed, default to a system font.
             try
             {
-                Font font = new Font(this.familyName, 12F);
+                System.Drawing.Font font = new System.Drawing.Font(this.familyName, 12F);
                 this.familyName = familyName;
                 font.Dispose();
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 this.familyName = System.Drawing.FontFamily.GenericSerif.Name;
             }
@@ -132,55 +125,63 @@ namespace Captcha
         private void GenerateImage()
         {
             // Create a new 32-bit bitmap image.
-            Bitmap bitmap = new Bitmap(this.width, this.height, PixelFormat.Format32bppArgb);
+            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(this.width, this.height
+                , System.Drawing.Imaging.PixelFormat.Format32bppArgb);
 
             // Create a graphics object for drawing.
-            Graphics g = Graphics.FromImage(bitmap);
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            Rectangle rect = new Rectangle(0, 0, this.width, this.height);
+            System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(bitmap);
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            System.Drawing.Rectangle rect = new System.Drawing.Rectangle(0, 0, this.width, this.height);
 
             // Fill in the background.
-            HatchBrush hatchBrush = new HatchBrush(HatchStyle.SmallConfetti, Color.LightGray, Color.White);
+            System.Drawing.Drawing2D.HatchBrush hatchBrush = 
+                new System.Drawing.Drawing2D.HatchBrush(
+                    System.Drawing.Drawing2D.HatchStyle.SmallConfetti
+                , System.Drawing.Color.LightGray
+                , System.Drawing.Color.White);
             g.FillRectangle(hatchBrush, rect);
 
             // Set up the text font.
-            SizeF size;
+            System.Drawing.SizeF size;
             float fontSize = rect.Height + 1;
-            Font font;
+            System.Drawing.Font font;
             // Adjust the font size until the text fits within the image.
             do
             {
                 fontSize--;
-                font = new Font(this.familyName, fontSize, FontStyle.Bold);
+                font = new System.Drawing.Font(this.familyName, fontSize, System.Drawing.FontStyle.Bold);
                 size = g.MeasureString(this.text, font);
             } while (size.Width > rect.Width);
 
             // Set up the text format.
-            StringFormat format = new StringFormat();
-            format.Alignment = StringAlignment.Center;
-            format.LineAlignment = StringAlignment.Center;
+            System.Drawing.StringFormat format = new System.Drawing.StringFormat();
+            format.Alignment = System.Drawing.StringAlignment.Center;
+            format.LineAlignment = System.Drawing.StringAlignment.Center;
 
             // Create a path using the text and warp it randomly.
-            GraphicsPath path = new GraphicsPath();
+            System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
             path.AddString(this.text, font.FontFamily, (int)font.Style, font.Size, rect, format);
             float v = 4F;
-            PointF[] points =
+            System.Drawing.PointF[] points =
 			{
-				new PointF(this.random.Next(rect.Width) / v, this.random.Next(rect.Height) / v),
-				new PointF(rect.Width - this.random.Next(rect.Width) / v, this.random.Next(rect.Height) / v),
-				new PointF(this.random.Next(rect.Width) / v, rect.Height - this.random.Next(rect.Height) / v),
-				new PointF(rect.Width - this.random.Next(rect.Width) / v, rect.Height - this.random.Next(rect.Height) / v)
+				new System.Drawing.PointF(this.random.Next(rect.Width) / v, this.random.Next(rect.Height) / v),
+				new System.Drawing.PointF(rect.Width - this.random.Next(rect.Width) / v, this.random.Next(rect.Height) / v),
+				new System.Drawing.PointF(this.random.Next(rect.Width) / v, rect.Height - this.random.Next(rect.Height) / v),
+				new System.Drawing.PointF(rect.Width - this.random.Next(rect.Width) / v, rect.Height - this.random.Next(rect.Height) / v)
 			};
-            Matrix matrix = new Matrix();
+            System.Drawing.Drawing2D.Matrix matrix = new System.Drawing.Drawing2D.Matrix();
             matrix.Translate(0F, 0F);
-            path.Warp(points, rect, matrix, WarpMode.Perspective, 0F);
+            path.Warp(points, rect, matrix, System.Drawing.Drawing2D.WarpMode.Perspective, 0F);
 
             // Draw the text.
-            hatchBrush = new HatchBrush(HatchStyle.LargeConfetti, Color.LightGray, Color.DarkGray);
+            hatchBrush = new System.Drawing.Drawing2D.HatchBrush(
+                System.Drawing.Drawing2D.HatchStyle.LargeConfetti
+                , System.Drawing.Color.LightGray
+                , System.Drawing.Color.DarkGray);
             g.FillPath(hatchBrush, path);
 
             // Add some random noise.
-            int m = Math.Max(rect.Width, rect.Height);
+            int m = System.Math.Max(rect.Width, rect.Height);
             for (int i = 0; i < (int)(rect.Width * rect.Height / 30F); i++)
             {
                 int x = this.random.Next(rect.Width);

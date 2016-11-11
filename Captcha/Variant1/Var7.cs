@@ -1,16 +1,4 @@
 ﻿
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using System.IO;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-
-
 namespace Captcha
 {
 
@@ -22,19 +10,21 @@ namespace Captcha
         public static byte[] CreateImage(string code)
         {
             byte[] imageBytes = null;
-            Random rand = new Random();
+            System.Random rand = new System.Random();
             
-            using (Bitmap bitmap = new Bitmap(200, 50, PixelFormat.Format32bppArgb))
+            using (System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(200, 50
+                , System.Drawing.Imaging.PixelFormat.Format32bppArgb))
             {
-                using (Graphics g = Graphics.FromImage(bitmap))
+                using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(bitmap))
                 {
-                    using (Pen pen = new Pen(Color.Yellow))
+                    using (System.Drawing.Pen pen = new System.Drawing.Pen(System.Drawing.Color.Yellow))
                     {
-                        using (SolidBrush b = new SolidBrush(Color.Black))
+                        using (System.Drawing.SolidBrush b = new System.Drawing.SolidBrush(System.Drawing.Color.Black))
                         {
-                            using (SolidBrush White = new SolidBrush(Color.White))
+                            using (System.Drawing.SolidBrush White = new System.Drawing.SolidBrush(System.Drawing.Color.White))
                             {
-                                Rectangle rect = new Rectangle(0, 0, 200, 50);
+                                System.Drawing.Rectangle rect = 
+                                    new System.Drawing.Rectangle(0, 0, 200, 50);
                                 int counter = 0;
 
                                 g.DrawRectangle(pen, rect);
@@ -42,7 +32,10 @@ namespace Captcha
 
                                 for (int i = 0; i < code.Length; i++)
                                 {
-                                    g.DrawString(code[i].ToString(), new Font("Georgia", 10 + rand.Next(14, 18)), White, new PointF(10 + counter, 10));
+                                    g.DrawString(code[i].ToString()
+                                        , new System.Drawing.Font("Georgia", 10 + rand.Next(14, 18))
+                                        , White
+                                        , new System.Drawing.PointF(10 + counter, 10));
                                     counter += 20;
                                 }
 
@@ -64,28 +57,30 @@ namespace Captcha
         }
 
 
-        private static void DrawRandomLines(Graphics g, Random rand)
+        private static void DrawRandomLines(System.Drawing.Graphics g, System.Random rand)
         {
-            using (SolidBrush green = new SolidBrush(Color.Green))
+            using (System.Drawing.SolidBrush green = new System.Drawing.SolidBrush(System.Drawing.Color.Green))
             {
                 //For Creating Lines on The Captcha
                 for (int i = 0; i < 20; i++)
                 {
-                    g.DrawLines(new Pen(green, 2), GetRandomPoints(rand));
+                    g.DrawLines(new System.Drawing.Pen(green, 2), GetRandomPoints(rand));
                 }
             }
             
-
         }
 
 
-        private static Point[] GetRandomPoints(Random rand)
+        private static System.Drawing.Point[] GetRandomPoints(System.Random rand)
         {
-            Point[] points = { new Point(rand.Next(10, 150), rand.Next(10, 150)), new Point(rand.Next(10, 100), rand.Next(10, 100)) };
+            System.Drawing.Point[] points = {
+                new System.Drawing.Point(rand.Next(10, 150), rand.Next(10, 150))
+                    , new System.Drawing.Point(rand.Next(10, 100), rand.Next(10, 100)) };
             return points;
         }
 
         string code;
-     
     }
+
+
 }

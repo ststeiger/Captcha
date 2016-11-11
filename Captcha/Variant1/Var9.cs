@@ -1,18 +1,20 @@
 ﻿
-using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
+
 namespace Captcha
 {
-    [Serializable]
+
+
+    [System.Serializable]
     public class Variant9
     {
         private int _height;
         private int _width;
-        private static Random _rand = new Random();
-        private DateTime _generatedAt;
+        private static System.Random _rand = new System.Random();
+        private System.DateTime _generatedAt;
         private string _randomText;
         private int _randomTextLength;
         private string _randomTextChars;
@@ -70,7 +72,7 @@ namespace Captcha
         /// <summary>
         /// Returns the date and time this image was last rendered
         /// </summary>
-        public DateTime RenderedAt {
+        public System.DateTime RenderedAt {
             get {
                 return _generatedAt;
             }
@@ -88,7 +90,7 @@ namespace Captcha
                     font1 = new Font(value, 12f);
                     _fontFamilyName = value;
                 }
-                catch (Exception ex) {
+                catch (System.Exception ex) {
                     _fontFamilyName = System.Drawing.FontFamily.GenericSerif.Name;
                 } finally {
                     font1.Dispose();
@@ -168,7 +170,7 @@ namespace Captcha
             set {
                 if ((value <= 60))
                 {
-                    throw new ArgumentOutOfRangeException("width", value, "width must be greater than 60.");
+                    throw new System.ArgumentOutOfRangeException("width", value, "width must be greater than 60.");
                 }
                 _width = value;
             }
@@ -183,7 +185,7 @@ namespace Captcha
             set {
                 if (value <= 30)
                 {
-                    throw new ArgumentOutOfRangeException("height", value, "height must be greater than 30.");
+                    throw new System.ArgumentOutOfRangeException("height", value, "height must be greater than 30.");
                 }
                 _height = value;
             }
@@ -240,7 +242,7 @@ namespace Captcha
         #endregion
         public Variant9()
         {
-            _rand = new Random();
+            _rand = new System.Random();
             _fontWarp = FontWarpFactor.Low;
             _backgroundNoise = BackgroundNoiseLevel.Low;
             _lineNoise = LineNoiseLevel.None;
@@ -252,8 +254,8 @@ namespace Captcha
             // -- a list of known good fonts in on both Windows XP and Windows Server 2003
             _fontWhitelist = "arial;arial black;comic sans ms;courier new;estrangelo edessa;franklin gothic medium;" + "georgia;lucida console;lucida sans unicode;mangal;microsoft sans serif;palatino linotype;" + "sylfaen;tahoma;times new roman;trebuchet ms;verdana";
             _randomText = GenerateRandomText();
-            _generatedAt = DateTime.UtcNow;
-            _guid = Guid.NewGuid().ToString();
+            _generatedAt = System.DateTime.UtcNow;
+            _guid = System.Guid.NewGuid().ToString();
         }
         /// <summary>
         /// Forces a new Captcha image to be generated using current property value settings.
@@ -326,19 +328,19 @@ namespace Captcha
             }
             switch (this.FontWarp) {
                 case FontWarpFactor.None:
-                    fsize = Convert.ToInt32(_height * 0.7);
+                    fsize = System.Convert.ToInt32(_height * 0.7);
                     break;
                 case FontWarpFactor.Low:
-                    fsize = Convert.ToInt32(_height * 0.8);
+                    fsize = System.Convert.ToInt32(_height * 0.8);
                     break;
                 case FontWarpFactor.Medium:
-                    fsize = Convert.ToInt32(_height * 0.85);
+                    fsize = System.Convert.ToInt32(_height * 0.85);
                     break;
                 case FontWarpFactor.High:
-                    fsize = Convert.ToInt32(_height * 0.9);
+                    fsize = System.Convert.ToInt32(_height * 0.9);
                     break;
                 case FontWarpFactor.Extreme:
-                    fsize = Convert.ToInt32(_height * 0.95);
+                    fsize = System.Convert.ToInt32(_height * 0.95);
                     break;
             }
             return new Font(fname, fsize, FontStyle.Bold);
@@ -371,7 +373,7 @@ namespace Captcha
                         //-- establish font and draw area
                         using (fnt = GetFont()) 
                         {
-                            rectChar = new Rectangle(Convert.ToInt32(charOffset * charWidth), 0, Convert.ToInt32(charWidth), _height);
+                            rectChar = new Rectangle(System.Convert.ToInt32(charOffset * charWidth), 0, System.Convert.ToInt32(charWidth), _height);
                             //-- warp the character
                             using (GraphicsPath gp = TextPath(c.ToString(), fnt, rectChar))
                             {
@@ -416,13 +418,13 @@ namespace Captcha
                     RangeModifier = 1.5f;
                     break;
             }
-            RectangleF rectF = new RectangleF(Convert.ToSingle(rect.Left), 0, Convert.ToSingle(rect.Width), rect.Height);
-            int hrange = Convert.ToInt32(rect.Height / WarpDivisor);
-            int wrange = Convert.ToInt32(rect.Width / WarpDivisor);
-            int left = rect.Left - Convert.ToInt32(wrange * RangeModifier);
-            int top = rect.Top - Convert.ToInt32(hrange * RangeModifier);
-            int width = rect.Left + rect.Width + Convert.ToInt32(wrange * RangeModifier);
-            int height = rect.Top + rect.Height + Convert.ToInt32(hrange * RangeModifier);
+            RectangleF rectF = new RectangleF(System.Convert.ToSingle(rect.Left), 0, System.Convert.ToSingle(rect.Width), rect.Height);
+            int hrange = System.Convert.ToInt32(rect.Height / WarpDivisor);
+            int wrange = System.Convert.ToInt32(rect.Width / WarpDivisor);
+            int left = rect.Left - System.Convert.ToInt32(wrange * RangeModifier);
+            int top = rect.Top - System.Convert.ToInt32(hrange * RangeModifier);
+            int width = rect.Left + rect.Width + System.Convert.ToInt32(wrange * RangeModifier);
+            int height = rect.Top + rect.Height + System.Convert.ToInt32(hrange * RangeModifier);
             if (left < 0) left = 0; 
             if (top < 0) top = 0; 
             if (width > this.Width) width = this.Width; 
@@ -465,8 +467,8 @@ namespace Captcha
             }
             using (SolidBrush br = new SolidBrush(_noiseColor))
             {
-                int max = Convert.ToInt32(Math.Max(rect.Width, rect.Height) / size);
-                for (int i = 0; i <= Convert.ToInt32((rect.Width * rect.Height) / density); i++) {
+                int max = System.Convert.ToInt32(System.Math.Max(rect.Width, rect.Height) / size);
+                for (int i = 0; i <= System.Convert.ToInt32((rect.Width * rect.Height) / density); i++) {
                     graphics1.FillEllipse(br, _rand.Next(rect.Width), _rand.Next(rect.Height), _rand.Next(max), _rand.Next(max));
                 }
             }
@@ -484,25 +486,25 @@ namespace Captcha
                     return;
                 case LineNoiseLevel.Low:
                     length = 4;
-                    width = Convert.ToSingle(_height / 31.25);
+                    width = System.Convert.ToSingle(_height / 31.25);
                     // 1.6
                     linecount = 1;
                     break;
                 case LineNoiseLevel.Medium:
                     length = 5;
-                    width = Convert.ToSingle(_height / 27.7777);
+                    width = System.Convert.ToSingle(_height / 27.7777);
                     // 1.8
                     linecount = 1;
                     break;
                 case LineNoiseLevel.High:
                     length = 3;
-                    width = Convert.ToSingle(_height / 25);
+                    width = System.Convert.ToSingle(_height / 25);
                     // 2.0
                     linecount = 2;
                     break;
                 case LineNoiseLevel.Extreme:
                     length = 3;
-                    width = Convert.ToSingle(_height / 22.7272);
+                    width = System.Convert.ToSingle(_height / 22.7272);
                     // 2.2
                     linecount = 3;
                     break;

@@ -22,11 +22,8 @@
 // 3. This notice may not be removed or altered from any source distribution.
 //
 //************************************************************************************
-using System;
-using System.Drawing;
-using System.Collections;
-using System.Drawing.Imaging;
-using System.Drawing.Drawing2D;
+
+
 using CSharpFilters;
 
 
@@ -44,11 +41,11 @@ namespace Captcha
 		private int img_width = 450;
 		private int img_height = 200;
 
-		private Font img_font;
+		private System.Drawing.Font img_font;
 		private string img_fontname = "arial black";
 		private float img_fontsize = 24;
-		private FontStyle img_fontstyle = FontStyle.Italic;
-		private Brush img_fontcolor = Brushes.Black;
+		private System.Drawing.FontStyle img_fontstyle = System.Drawing.FontStyle.Italic;
+		private System.Drawing.Brush img_fontcolor = System.Drawing.Brushes.Black;
 
 		private short nWave = 15;
 		private double fDegree = 0;
@@ -92,7 +89,7 @@ namespace Captcha
 			}
 		}
 
-		public FontStyle FontStyle
+		public System.Drawing.FontStyle FontStyle
 		{
 			set
 			{
@@ -100,7 +97,7 @@ namespace Captcha
 			}
 		}
 
-		public Brush FontColor
+		public System.Drawing.Brush FontColor
 		{
 			set
 			{
@@ -150,36 +147,37 @@ namespace Captcha
 		///
 		/// makeCaptcha
 		///
-		public Bitmap makeCaptcha()
+		public System.Drawing.Bitmap makeCaptcha()
 		{
 
 
-			Random randomGenerator = new Random();
+			System.Random randomGenerator = new System.Random();
 
-			Bitmap bmp = new Bitmap(img_width, img_height, PixelFormat.Format16bppRgb555);
-			Rectangle rect = new Rectangle(0, 0, img_width, img_height);
-
- 
-			StringFormat sFormat = new StringFormat();
-			sFormat.Alignment = StringAlignment.Center;
-			sFormat.LineAlignment = StringAlignment.Center;
-
-			Graphics g = Graphics.FromImage(bmp);
+            System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(img_width, img_height
+                , System.Drawing.Imaging.PixelFormat.Format16bppRgb555);
+            System.Drawing.Rectangle rect = new System.Drawing.Rectangle(0, 0, img_width, img_height);
 
 
-			// Set up the text font.
-			SizeF size;
+            System.Drawing.StringFormat sFormat = new System.Drawing.StringFormat();
+			sFormat.Alignment = System.Drawing.StringAlignment.Center;
+			sFormat.LineAlignment = System.Drawing.StringAlignment.Center;
+
+            System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(bmp);
+
+
+            // Set up the text font.
+            System.Drawing.SizeF size;
 			float fontSize = img_fontsize + 1;
-			Font font;
+            System.Drawing.Font font;
 		
 			// try to use requested font, but
 			// If the named font is not installed, default to a system font.
 			try
 			{
-				font = new Font(img_fontname, img_fontsize);
+				font = new System.Drawing.Font(img_fontname, img_fontsize);
 				font.Dispose();
 			}
-			catch (Exception ex)
+			catch (System.Exception ex)
 			{
 				img_fontname = System.Drawing.FontFamily.GenericSerif.Name;
 			}
@@ -191,37 +189,37 @@ namespace Captcha
 
 			for(int ii=0; ii< sKeyword.Length; ii++)
 			{
-				tempKey = String.Concat(tempKey, sKeyword[ii].ToString());
-				tempKey = String.Concat(tempKey, " ");
+				tempKey = string.Concat(tempKey, sKeyword[ii].ToString());
+				tempKey = string.Concat(tempKey, " ");
 			}
 
 			// Adjust the font size until the text fits within the image.
 			do
 			{
 				fontSize--;
-				font = new Font(img_fontname, fontSize,	img_fontstyle);
+				font = new System.Drawing.Font(img_fontname, fontSize,	img_fontstyle);
 				size = g.MeasureString(tempKey, font);
 			} while (size.Width > (0.8*bmp.Width));
 
 			img_font = font;
 
 
-			g.Clear(Color.Silver); // blank the image
-			g.SmoothingMode = SmoothingMode.AntiAlias; // antialias objects
+			g.Clear(System.Drawing.Color.Silver); // blank the image
+			g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias; // antialias objects
 
 			// fill with a liner gradient
 			// random colors
 			g.FillRectangle(	
-				new LinearGradientBrush(
-					new Point(0,0), 
-					new Point(bmp.Width,bmp.Height), 
-					Color.FromArgb(
+				new System.Drawing.Drawing2D.LinearGradientBrush(
+					new System.Drawing.Point(0,0), 
+					new System.Drawing.Point(bmp.Width,bmp.Height),
+                    System.Drawing.Color.FromArgb(
 						255, //randomGenerator.Next(255),
 						randomGenerator.Next(255),
 						randomGenerator.Next(255),
 						randomGenerator.Next(255)
 					),
-					Color.FromArgb(
+                    System.Drawing.Color.FromArgb(
 						randomGenerator.Next(100),
 						randomGenerator.Next(255),
 						randomGenerator.Next(255),
@@ -239,22 +237,22 @@ namespace Captcha
 				BitmapFilter.Swirl(bmp, fDegree , true);
 			}
 
-			// draw a first line crossing the image
-//			int y1, y2;
-//			y1 = randomGenerator.Next(bmp.Height/3) + (bmp.Height/3);
-//			y2 = bmp.Height - randomGenerator.Next(bmp.Height/3);
-//
-//			g.DrawLine(new Pen( img_fontcolor, 2),
-//				new Point(0,y1), new Point(bmp.Width,y2));
+            // draw a first line crossing the image
+            //			int y1, y2;
+            //			y1 = randomGenerator.Next(bmp.Height/3) + (bmp.Height/3);
+            //			y2 = bmp.Height - randomGenerator.Next(bmp.Height/3);
+            //
+            //			g.DrawLine(new Pen( img_fontcolor, 2),
+            //				new Point(0,y1), new Point(bmp.Width,y2));
 
 
-			// Add some random noise.
-			HatchBrush hatchBrush = new HatchBrush(
-				HatchStyle.LargeConfetti,
-				Color.LightGray,
-				Color.DarkGray);
+            // Add some random noise.
+            System.Drawing.Drawing2D.HatchBrush hatchBrush = new System.Drawing.Drawing2D.HatchBrush(
+                System.Drawing.Drawing2D.HatchStyle.LargeConfetti,
+                System.Drawing.Color.LightGray,
+                System.Drawing.Color.DarkGray);
 
-			int m = Math.Max(rect.Width, rect.Height);
+			int m = System.Math.Max(rect.Width, rect.Height);
 			for (int i = 0; i < (int) (rect.Width * rect.Height / 30F); i++)
 			{
 				int x = randomGenerator.Next(rect.Width);
@@ -274,8 +272,8 @@ namespace Captcha
 			int deltax;
 
 
-			deltax = Convert.ToInt32(size.Width/tempKey.Length);
-			posx = Convert.ToInt32((img_width - size.Width)/2);
+			deltax = System.Convert.ToInt32(size.Width/tempKey.Length);
+			posx = System.Convert.ToInt32((img_width - size.Width)/2);
 
 			// write each keyword char
 			for (int l=0; l < tempKey.Length; l++ )
@@ -293,17 +291,18 @@ namespace Captcha
 			}
 
 
-			// draw a curve 
-			Point[] ps = new Point[nPoints];
+            // draw a curve 
+            System.Drawing.Point[] ps = new System.Drawing.Point[nPoints];
 			
 			for (int ii=0; ii < nPoints; ii++)
 			{
 				int x,y;
 				x = randomGenerator.Next(bmp.Width);
 				y = randomGenerator.Next(bmp.Height);
-				ps[ii] = new Point(x,y);
+				ps[ii] = new System.Drawing.Point(x,y);
 			}
-			g.DrawCurve(new Pen( img_fontcolor, 2), ps, Convert.ToSingle(randomGenerator.NextDouble()));
+			g.DrawCurve(new System.Drawing.Pen( img_fontcolor, 2), ps
+                , System.Convert.ToSingle(randomGenerator.NextDouble()));
 
 			// apply water filter
 			BitmapFilter.Water(bmp, nWave, false);
@@ -316,5 +315,8 @@ namespace Captcha
 			return bmp;
 		}
 
+
 	}
+
+
 }

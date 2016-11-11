@@ -121,7 +121,13 @@ namespace Captcha
             RNCaptcha rn = new RNCaptcha(sCaptchaText);
             byte[] captchaBytes = System.Convert.FromBase64String(rn.GetCaptcha());
             this.pictureBox1.Image = Helpers.ByteArrayToImage(captchaBytes);
+        }
 
+
+        public void Variant11()
+        {
+            byte[] captchaBytes = Warping.GetWarpCaptcha();
+            this.pictureBox1.Image = Helpers.ByteArrayToImage(captchaBytes);
         }
 
 
@@ -131,12 +137,14 @@ namespace Captcha
             // Variant2();
             // Variant3();
             // Variant4();
-            Variant5();
+            // Variant5();
             // Variant6();
             // Variant7();
             // Variant8();
             // Variant9();
             // Variant10();
+            Variant11();
+
             return;
 
             string sCaptchaText = "abc123";

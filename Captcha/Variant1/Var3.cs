@@ -1,12 +1,4 @@
 ﻿
-//Extra name space
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.Drawing.Text;
-using System;
-
-
 // http://www.codeproject.com/Articles/169371/Captcha-Image-using-C-in-ASP-NET
 public class RandomImage
 {
@@ -21,7 +13,7 @@ public class RandomImage
     }
 
 
-    public Bitmap Image
+    public System.Drawing.Bitmap Image
     {
         get { return this.image; }
     }
@@ -43,8 +35,8 @@ public class RandomImage
     private string text;
     private int width;
     private int height;
-    private Bitmap image;
-    private Random random = new Random();
+    private System.Drawing.Bitmap image;
+    private System.Random random = new System.Random();
 
 
     //Methods declaration
@@ -58,7 +50,7 @@ public class RandomImage
 
     public void Dispose()
     {
-        GC.SuppressFinalize(this);
+        System.GC.SuppressFinalize(this);
         this.Dispose(true);
     }
 
@@ -73,10 +65,10 @@ public class RandomImage
     private void SetDimensions(int width, int height)
     {
         if (width <= 0)
-            throw new ArgumentOutOfRangeException("width", width,
+            throw new System.ArgumentOutOfRangeException("width", width,
                 "Argument out of range, must be greater than zero.");
         if (height <= 0)
-            throw new ArgumentOutOfRangeException("height", height,
+            throw new System.ArgumentOutOfRangeException("height", height,
                 "Argument out of range, must be greater than zero.");
         this.width = width;
         this.height = height;
@@ -123,49 +115,53 @@ public class RandomImage
 
     private void GenerateImage()
     {
-        Bitmap bitmap = new Bitmap
-          (this.width, this.height, PixelFormat.Format32bppArgb);
-        Graphics g = Graphics.FromImage(bitmap);
-        g.SmoothingMode = SmoothingMode.AntiAlias;
-        Rectangle rect = new Rectangle(0, 0, this.width, this.height);
-        HatchBrush hatchBrush = new HatchBrush(HatchStyle.SmallConfetti,
-            Color.LightGray, Color.White);
+        System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap
+          (this.width, this.height, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+        System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(bitmap);
+        g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+        System.Drawing.Rectangle rect = new System.Drawing.Rectangle(0, 0, this.width, this.height);
+        System.Drawing.Drawing2D.HatchBrush hatchBrush = 
+            new System.Drawing.Drawing2D.HatchBrush(
+                System.Drawing.Drawing2D.HatchStyle.SmallConfetti,
+            System.Drawing.Color.LightGray, System.Drawing.Color.White);
         g.FillRectangle(hatchBrush, rect);
-        SizeF size;
+        System.Drawing.SizeF size;
         float fontSize = rect.Height + 1;
-        Font font;
+        System.Drawing.Font font;
 
         do
         {
             fontSize--;
-            font = new Font(FontFamily.GenericSansSerif, fontSize, FontStyle.Bold);
+            font = new System.Drawing.Font(System.Drawing.FontFamily.GenericSansSerif, fontSize, System.Drawing.FontStyle.Bold);
             size = g.MeasureString(this.text, font);
         } while (size.Width > rect.Width);
-        StringFormat format = new StringFormat();
-        format.Alignment = StringAlignment.Center;
-        format.LineAlignment = StringAlignment.Center;
-        GraphicsPath path = new GraphicsPath();
+        System.Drawing.StringFormat format = new System.Drawing.StringFormat();
+        format.Alignment = System.Drawing.StringAlignment.Center;
+        format.LineAlignment = System.Drawing.StringAlignment.Center;
+        System.Drawing.Drawing2D.GraphicsPath path = new System.Drawing.Drawing2D.GraphicsPath();
         //path.AddString(this.text, font.FontFamily, (int) font.Style, 
         //    font.Size, rect, format);
         path.AddString(this.text, font.FontFamily, (int)font.Style, 75, rect, format);
         float v = 4F;
-        PointF[] points =
+        System.Drawing.PointF[] points =
           {
-                new PointF(this.random.Next(rect.Width) / v, this.random.Next(
+                new System.Drawing.PointF(this.random.Next(rect.Width) / v, this.random.Next(
                    rect.Height) / v),
-                new PointF(rect.Width - this.random.Next(rect.Width) / v, 
+                new System.Drawing.PointF(rect.Width - this.random.Next(rect.Width) / v, 
                     this.random.Next(rect.Height) / v),
-                new PointF(this.random.Next(rect.Width) / v, 
+                new System.Drawing.PointF(this.random.Next(rect.Width) / v, 
                     rect.Height - this.random.Next(rect.Height) / v),
-                new PointF(rect.Width - this.random.Next(rect.Width) / v,
+                new System.Drawing.PointF(rect.Width - this.random.Next(rect.Width) / v,
                     rect.Height - this.random.Next(rect.Height) / v)
           };
-        Matrix matrix = new Matrix();
+        System.Drawing.Drawing2D.Matrix matrix = new System.Drawing.Drawing2D.Matrix();
         matrix.Translate(0F, 0F);
-        path.Warp(points, rect, matrix, WarpMode.Perspective, 0F);
-        hatchBrush = new HatchBrush(HatchStyle.Percent10, Color.Black, Color.SkyBlue);
+        path.Warp(points, rect, matrix, System.Drawing.Drawing2D.WarpMode.Perspective, 0F);
+        hatchBrush = new System.Drawing.Drawing2D.HatchBrush(
+            System.Drawing.Drawing2D.HatchStyle.Percent10
+            , System.Drawing.Color.Black, System.Drawing.Color.SkyBlue);
         g.FillPath(hatchBrush, path);
-        int m = Math.Max(rect.Width, rect.Height);
+        int m = System.Math.Max(rect.Width, rect.Height);
         for (int i = 0; i < (int)(rect.Width * rect.Height / 30F); i++)
         {
             int x = this.random.Next(rect.Width);
