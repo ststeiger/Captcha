@@ -93,7 +93,7 @@ namespace Captcha
             try
             {
                 System.Random r = new System.Random();
-                int w = 250, h = 75;
+                int w = 350, h = 75;
                 string family = "Arial Rounded MT Bold";
                 using (var bmp = new System.Drawing.Bitmap(w, h
                     , System.Drawing.Imaging.PixelFormat.Format32bppArgb))

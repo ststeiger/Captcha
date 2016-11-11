@@ -133,17 +133,17 @@ namespace Captcha
 
         private void btnVariant1_Click(object sender, EventArgs e)
         {
-            // Variant1();
-            // Variant2();
-            // Variant3();
-            // Variant4();
-            // Variant5();
-            // Variant6();
-            // Variant7();
-            // Variant8();
-            // Variant9();
-            // Variant10();
-            Variant11();
+            // Variant1(); // Interessant, aber schlecht
+            // Variant2(); // Zu farbig, aber gut
+            Variant3(); // Gut
+            // Variant4(); // Grau, einfach
+            // Variant5(); // Zu Farbig, Background-Filter
+            // Variant6(); // Hässlich und schlecht
+            // Variant7(); // Microsoft-Schrott 
+            // Variant8(); // Guter Test, aber Teils kaum Menschenlesbar...
+            // Variant9(); // Zu schwarz, und kaum Menschenlesbar
+            // Variant10(); // Zu einfach, zu farbig
+            // Variant11(); // Bräuchte mehr Zeit - um Menschenlesbar zu machen.
 
             return;
 

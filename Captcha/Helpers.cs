@@ -1,14 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace Captcha
 {
 
 
     public class Helpers
     {
+
+        public static string foo()
+        {
+            string token = null;
+
+            using (System.Security.Cryptography.RandomNumberGenerator rng = new System.Security.Cryptography.RNGCryptoServiceProvider())
+            {
+                byte[] tokenData = new byte[32];
+                rng.GetBytes(tokenData);
+
+                token = System.Convert.ToBase64String(tokenData);
+            }
+
+            return token;
+        }
+
+
+
+        public static string GetMimeType(System.Drawing.Image image)
+        {
+            System.Guid formatUID = image.RawFormat.Guid;
+
+            System.Drawing.Imaging.ImageCodecInfo[] codecs = System.Drawing.Imaging.ImageCodecInfo.GetImageEncoders();
+            for (int i = 0; i < codecs.Length; ++i)
+            {
+                if (codecs[i].FormatID == formatUID)
+                    return codecs[i].MimeType;
+            }
+
+            return "image/unknown";
+        }
+
+
+        public static string GetMimeType(System.Drawing.Imaging.ImageFormat format)
+        {
+            System.Guid formatUID = format.Guid;
+
+            System.Drawing.Imaging.ImageCodecInfo[] codecs = System.Drawing.Imaging.ImageCodecInfo.GetImageEncoders();
+            for (int i = 0; i < codecs.Length; ++i)
+            {
+                if (codecs[i].FormatID == formatUID)
+                    return codecs[i].MimeType;
+            }
+
+            return "image/unknown";
+        }
+
+
+
+
+
+
 
 
 
@@ -32,21 +80,21 @@ namespace Captcha
         //
         public static string GenerateRandomNumber()
         {
-            Random random = new Random();
+            System.Random random = new System.Random();
 
             string s = "";
             for (int i = 0; i < 6; i++)
-                s = String.Concat(s, random.Next(10).ToString());
+                s = string.Concat(s, random.Next(10).ToString());
             return s;
         }
 
 
-        private string GetRandomTextWithNumbers()
+        public static string GetRandomTextWithNumbers()
         {
-            StringBuilder randomText = new StringBuilder();
+            System.Text.StringBuilder randomText = new System.Text.StringBuilder();
             string alphabets = "abcdefghijklmnopqrstuvwxyz1234567890";
 
-            Random r = new Random();
+            System.Random r = new System.Random();
             for (int j = 0; j <= 5; j++)
             {
                 randomText.Append(alphabets[r.Next(alphabets.Length)]);
@@ -62,12 +110,12 @@ namespace Captcha
 
         public static string GetRandomText()
         {
-            StringBuilder randomText = new StringBuilder();
-            string code = String.Empty;
+            System.Text.StringBuilder randomText = new System.Text.StringBuilder();
+            string code = string.Empty;
 
             string alphabets = "abcdefghijklmnopqrstuvwxyz";
 
-            Random r = new Random();
+            System.Random r = new System.Random();
 
             for (int j = 0; j <= 5; j++)
             {
@@ -82,7 +130,7 @@ namespace Captcha
         // Function to generate random string with Random class.
         public static string GenerateRandomCode()
         {
-            Random r = new Random();
+            System.Random r = new System.Random();
             string s = "";
             for (int j = 0; j < 5; j++)
             {
@@ -96,15 +144,15 @@ namespace Captcha
                         break;
                     case 2:
                         ch = r.Next(65, 90);
-                        s = s + Convert.ToChar(ch).ToString();
+                        s = s + System.Convert.ToChar(ch).ToString();
                         break;
                     case 3:
                         ch = r.Next(97, 122);
-                        s = s + Convert.ToChar(ch).ToString();
+                        s = s + System.Convert.ToChar(ch).ToString();
                         break;
                     default:
                         ch = r.Next(97, 122);
-                        s = s + Convert.ToChar(ch).ToString();
+                        s = s + System.Convert.ToChar(ch).ToString();
                         break;
                 }
                 r.NextDouble();

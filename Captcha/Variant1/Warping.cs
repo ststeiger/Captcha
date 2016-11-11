@@ -14,6 +14,9 @@ namespace Captcha
             byte[] imageBytes = null;
 
             string text = "I can haz Peanut";
+            text = "This is a test";
+            text = Helpers.GenerateRandomCode();
+
             System.Drawing.Drawing2D.GraphicsPath textPath = new System.Drawing.Drawing2D.GraphicsPath();
 
             float fontSize = 23;
@@ -33,6 +36,17 @@ namespace Captcha
             {
                 using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(bmp))
                 {
+                    g.Clear(System.Drawing.Color.White);
+
+                    System.Drawing.Drawing2D.HatchBrush hatchBrush =
+    new System.Drawing.Drawing2D.HatchBrush(
+        //System.Drawing.Drawing2D.HatchStyle.SmallConfetti,
+         System.Drawing.Drawing2D.HatchStyle.Plaid,
+    System.Drawing.Color.LightGray, System.Drawing.Color.White);
+                    g.FillRectangle(hatchBrush, 0,0,bmp.Width, bmp.Height);
+
+
+
                     // GraphicsPath bezierPath = textPath;
                     // GraphicsPath bezierPath = BezierWarp(textPath, new System.Drawing.Size((int)textBounds.Width, (int)textBounds.Height));
                     System.Drawing.Drawing2D.GraphicsPath bezierPath = 
