@@ -20,20 +20,22 @@ namespace Captcha
         public void Variant1()
         {
             string sCaptchaText = "abc123";
-            byte[] captchaBytes = Captcha.Variant2.VisualCaptcha("someTest");
+            byte[] captchaBytes = Captcha.Variant1.GetCaptchaImage(sCaptchaText, System.Drawing.Imaging.ImageFormat.Png);
             this.pictureBox1.Image = Helpers.ByteArrayToImage(captchaBytes);
         }
 
         public void Variant2()
         {
             string sCaptchaText = "abc123";
-            byte[] captchaBytes = Captcha.Variant1.GetCaptchaImage(sCaptchaText, System.Drawing.Imaging.ImageFormat.Png);
+            byte[] captchaBytes = Captcha.Variant2.VisualCaptcha("someTest");
             this.pictureBox1.Image = Helpers.ByteArrayToImage(captchaBytes);
         }
+
 
         public void Variant3()
         {
             string CaptchaImageText = Helpers.GenerateRandomCode();
+            //CaptchaImageText = "CaptchaImageText";
             // Create a CAPTCHA image using the text stored in the Session object.
             RandomImage ci = new RandomImage(CaptchaImageText, 300, 75);
             this.pictureBox1.Image = ci.Image;

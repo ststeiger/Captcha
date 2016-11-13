@@ -179,11 +179,11 @@ namespace Captcha
 
             byte[] captchaBytes = null;
 
-            using (System.IO.MemoryStream oMemoryStream = new System.IO.MemoryStream())
+            using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
             {
-                oOutputBitmap.Save(oMemoryStream, format);
-                captchaBytes = oMemoryStream.GetBuffer();
-            } // End Using oMemoryStream 
+                oOutputBitmap.Save(ms, format);
+                captchaBytes = ms.ToArray();
+            } // End Using ms 
 
             return captchaBytes;
         }
