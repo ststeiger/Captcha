@@ -16,6 +16,7 @@ namespace Captcha
             string text = "I can haz Peanut";
             text = "This is a test";
             text = Helpers.GenerateRandomCode();
+            text = Helpers.GenerateRandomNumber();
 
             System.Drawing.Drawing2D.GraphicsPath textPath = new System.Drawing.Drawing2D.GraphicsPath();
 
@@ -24,33 +25,38 @@ namespace Captcha
             // textPath.AddString("st", null, 123, 12, )
 
             // the baseline should start at 0,0, so the next line is not quite correct
-            textPath.AddString(text, System.Drawing.FontFamily.GenericSansSerif
-                , (int)System.Drawing.FontStyle.Bold, fontSize
-                , new System.Drawing.Point(0, 0)
-                , System.Drawing.StringFormat.GenericTypographic);
+            textPath.AddString(
+                 text
+                ,System.Drawing.FontFamily.GenericSansSerif
+                ,(int)System.Drawing.FontStyle.Bold, fontSize
+                ,new System.Drawing.Point(0, 0)
+                ,System.Drawing.StringFormat.GenericTypographic
+            );
 
             System.Drawing.RectangleF textBounds = textPath.GetBounds();
 
 
-            using (System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(500, 250))
+            using (System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(300, 150))
             {
                 using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(bmp))
                 {
                     g.Clear(System.Drawing.Color.White);
 
                     System.Drawing.Drawing2D.HatchBrush hatchBrush =
-    new System.Drawing.Drawing2D.HatchBrush(
-        //System.Drawing.Drawing2D.HatchStyle.SmallConfetti,
-         System.Drawing.Drawing2D.HatchStyle.Plaid,
-    System.Drawing.Color.LightGray, System.Drawing.Color.White);
+                        new System.Drawing.Drawing2D.HatchBrush(
+                            //System.Drawing.Drawing2D.HatchStyle.SmallConfetti 
+                            System.Drawing.Drawing2D.HatchStyle.Wave
+                            //System.Drawing.Drawing2D.HatchStyle.Plaid
+                            ,System.Drawing.Color.LightGray
+                            //, System.Drawing.Color.Black
+                            ,System.Drawing.Color.White
+                    );
                     g.FillRectangle(hatchBrush, 0,0,bmp.Width, bmp.Height);
-
 
 
                     // GraphicsPath bezierPath = textPath;
                     // GraphicsPath bezierPath = BezierWarp(textPath, new System.Drawing.Size((int)textBounds.Width, (int)textBounds.Height));
-                    System.Drawing.Drawing2D.GraphicsPath bezierPath = 
-                        BezierWarp(textPath, new System.Drawing.Size(bmp.Width, bmp.Height));
+                    System.Drawing.Drawing2D.GraphicsPath bezierPath = BezierWarp(textPath, new System.Drawing.Size(bmp.Width, bmp.Height));
 
                     // draw the transformed text path		
                     g.DrawPath(System.Drawing.Pens.Black, bezierPath);

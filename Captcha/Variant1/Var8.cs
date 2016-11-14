@@ -1,4 +1,4 @@
-﻿#if true 
+﻿#if true  
 
 
 /** 
@@ -29,93 +29,99 @@ using System.Drawing.Imaging;
 
 namespace Captcha
 {
-	/// <summary>
-	/// Amount of random font warping to apply to rendered text
-	/// </summary>
-	public enum FontWarpFactor
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		None,
-		/// <summary>
-		/// 
-		/// </summary>
-		Low,
-		/// <summary>
-		/// 
-		/// </summary>
-		Medium,
-		/// <summary>
-		/// 
-		/// </summary>
-		High,
-		/// <summary>
-		/// 
-		/// </summary>
-		Extreme
-	}
 
-	/// <summary>
-	/// Amount of background noise to add to rendered image
-	/// </summary>
-	public enum BackgroundNoiseLevel
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		None,
-		/// <summary>
-		/// 
-		/// </summary>
-		Low,
-		/// <summary>
-		/// 
-		/// </summary>
-		Medium,
-		/// <summary>
-		/// 
-		/// </summary>
-		High,
-		/// <summary>
-		/// 
-		/// </summary>
-		Extreme
-	}
-
-	/// <summary>
-	/// Amount of curved line noise to add to rendered image
-	/// </summary>
-	public enum LineNoiseLevel
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		None,
-		/// <summary>
-		/// 
-		/// </summary>
-		Low,
-		/// <summary>
-		/// 
-		/// </summary>
-		Medium,
-		/// <summary>
-		/// 
-		/// </summary>
-		High,
-		/// <summary>
-		/// 
-		/// </summary>
-		Extreme
-	}
 
 	/// <summary>
 	/// CAPTCHA Image
 	/// </summary>
 	/// <seealso href="http://www.codinghorror.com">Original By Jeff Atwood</seealso>
-	public class CaptchaImage
+	public class Variant8
 	{
+
+
+        /// <summary>
+        /// Amount of random font warping to apply to rendered text
+        /// </summary>
+        public enum FontWarpFactor
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            None,
+            /// <summary>
+            /// 
+            /// </summary>
+            Low,
+            /// <summary>
+            /// 
+            /// </summary>
+            Medium,
+            /// <summary>
+            /// 
+            /// </summary>
+            High,
+            /// <summary>
+            /// 
+            /// </summary>
+            Extreme
+        }
+
+        /// <summary>
+        /// Amount of background noise to add to rendered image
+        /// </summary>
+        public enum BackgroundNoiseLevel
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            None,
+            /// <summary>
+            /// 
+            /// </summary>
+            Low,
+            /// <summary>
+            /// 
+            /// </summary>
+            Medium,
+            /// <summary>
+            /// 
+            /// </summary>
+            High,
+            /// <summary>
+            /// 
+            /// </summary>
+            Extreme
+        }
+
+        /// <summary>
+        /// Amount of curved line noise to add to rendered image
+        /// </summary>
+        public enum LineNoiseLevel
+        {
+            /// <summary>
+            /// 
+            /// </summary>
+            None,
+            /// <summary>
+            /// 
+            /// </summary>
+            Low,
+            /// <summary>
+            /// 
+            /// </summary>
+            Medium,
+            /// <summary>
+            /// 
+            /// </summary>
+            High,
+            /// <summary>
+            /// 
+            /// </summary>
+            Extreme
+        }
+
+
+
 		#region Static
 
 		/// <summary>
@@ -123,12 +129,12 @@ namespace Captcha
 		/// </summary>
 		/// <param name="guid">The GUID.</param>
 		/// <returns></returns>
-		public static CaptchaImage GetCachedCaptcha(string guid)
+		public static Variant8 GetCachedCaptcha(string guid)
 		{
 			if (string.IsNullOrEmpty(guid))
 				return null;
 
-			return (CaptchaImage)System.Web.HttpRuntime.Cache.Get(guid);
+			return (Variant8)System.Web.HttpRuntime.Cache.Get(guid);
 		}
 
 		/// <summary>
@@ -241,7 +247,7 @@ namespace Captcha
 		/// <summary>
 		/// Initializes the <see cref="CaptchaImage"/> class.
 		/// </summary>
-		static CaptchaImage()
+		static Variant8()
 		{
 			FontWarp = FontWarpFactor.Medium;
 			BackgroundNoise = BackgroundNoiseLevel.Low;
@@ -254,7 +260,7 @@ namespace Captcha
 		/// <summary>
 		/// Initializes a new instance of the <see cref="CaptchaImage"/> class.
 		/// </summary>
-		public CaptchaImage()
+        public Variant8()
 		{
 			_rand = new System.Random();
             this.Width = 180;

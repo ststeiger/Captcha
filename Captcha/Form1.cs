@@ -53,9 +53,10 @@ namespace Captcha
         {
             byte[] imageBytes = null;
 
-            int nWidth = 500;
-            int nHeight = 100;
-            string sKeyword ="HELLO";
+            int nWidth = 250;
+            int nHeight = 90;
+            // string sKeyword ="HELLO";
+            string sKeyword = Helpers.GenerateRandomCode();
             // string sFontName
             // float fFontSize 
 
@@ -101,9 +102,9 @@ namespace Captcha
 
         public void Variant8()
         {
-            CaptchaImage ci = new CaptchaImage();
-            ci.Width = 500;
-            ci.Height = 100;
+            Variant8 ci = new Variant8();
+            // ci.Width = 500;
+            // ci.Height = 100;
             this.pictureBox1.Image = ci.RenderImage();
         }
 
@@ -111,8 +112,8 @@ namespace Captcha
         public void Variant9()
         {
             Variant9 ci = new Variant9();
-            ci.Width = 500;
-            ci.Height = 100;
+            // ci.Width = 500;
+            // ci.Height = 100;
             this.pictureBox1.Image = ci.RenderImage();
         }
 
@@ -133,19 +134,36 @@ namespace Captcha
         }
 
 
+        
+        public void Variant12()
+        {
+            Variant12 ci = new Variant12();
+            ci.TextLength=5;
+            ci.TextChars="abcdef";
+
+            this.pictureBox1.Image = ci.RenderImage();
+        }
+
+        
+
+        
+
+
         private void btnVariant1_Click(object sender, EventArgs e)
         {
-            // Variant1(); // Interessant, aber schlecht
-            // Variant2(); // Zu farbig, aber gut
-            Variant3(); // Gut
-            // Variant4(); // Grau, einfach
-            // Variant5(); // Zu Farbig, Background-Filter
-            // Variant6(); // Hässlich und schlecht
-            // Variant7(); // Microsoft-Schrott 
-            // Variant8(); // Guter Test, aber Teils kaum Menschenlesbar...
-            // Variant9(); // Zu schwarz, und kaum Menschenlesbar
-            // Variant10(); // Zu einfach, zu farbig
-            // Variant11(); // Bräuchte mehr Zeit - um Menschenlesbar zu machen.
+            // Variant1(); // Quite good, but colorful
+            // Variant2(); // Interesting, but bad 
+            // Variant3(); // Beautiful
+            // Variant4(); // Business-Gray
+            // Variant5(); // Too colorful, background-filter
+            // Variant6(); // horrible and bad
+            // Variant7(); // Microsoft-crap 
+            // Variant8(); // Very good, somewhat colorful
+            // Variant9(); // Black, simple
+            // Variant10(); // Too simple, too colorful 
+            Variant11(); // Woud need more time to make human-readable
+            // Variant12(); // Similar to 9
+            
 
             return;
 
