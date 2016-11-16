@@ -245,6 +245,71 @@ namespace Captcha
         }
 
 
+        public static void CIDR2IP()
+        {
+            string IP = "5.39.40.96/27";
+            IP = "88.84.128.0/19";
+            CIDR2IP(IP);
+        }
+
+        private static string toip(uint ip)
+        {
+            return String.Format("{0}.{1}.{2}.{3}", ip >> 24, (ip >> 16) & 0xff, (ip >> 8) & 0xff, ip & 0xff);
+        }
+
+
+        // https://www.digitalocean.com/community/tutorials/understanding-ip-addresses-subnets-and-cidr-notation-for-networking
+        public static void CIDR2IP(string IP)
+        {   
+            string[] parts = IP.Split('.', '/');
+
+            uint ipnum = (System.Convert.ToUInt32(parts[0]) << 24) |
+                (System.Convert.ToUInt32(parts[1]) << 16) |
+                (System.Convert.ToUInt32(parts[2]) << 8) |
+                System.Convert.ToUInt32(parts[3]);
+
+            int maskbits = Convert.ToInt32(parts[4]);
+            uint mask = 0xffffffff;
+            mask <<= (32 - maskbits);
+
+            uint ipstart = ipnum & mask;
+            uint ipend = ipnum | (mask ^ 0xffffffff);
+
+            System.Console.WriteLine(toip(ipstart) + " - " + toip(ipend));
+        }
+
+        // https://dev.maxmind.com/geoip/
+        // https://stackoverflow.com/questions/461742/how-to-convert-an-ipv4-address-into-a-integer-in-c
+        public static void IPrange2CIDR(string ip1, string ip2)
+        {
+            // uint startAddr = 0xc0a80001; // 192.168.0.1
+            // uint endAddr = 0xc0a800fe;   // 192.168.0.254
+            uint startAddr = System.BitConverter.ToUInt32(System.Net.IPAddress.Parse(ip1).GetAddressBytes(), 0);
+            uint endAddr = System.BitConverter.ToUInt32(System.Net.IPAddress.Parse(ip2).GetAddressBytes(), 0);
+
+            
+
+            // Determine all bits that are different between the two IPs
+            uint diffs = startAddr ^ endAddr;
+
+            // Now count the number of consecutive zero bits starting at the most significant
+            int bits = 32;
+            int mask = 0;
+            while (diffs != 0)
+            {
+                // We keep shifting diffs right until it's zero (i.e. we've shifted all the non-zero bits off)
+                diffs >>= 1;
+                // Every time we shift, that's one fewer consecutive zero bits in the prefix
+                bits--;
+                // Accumulate a mask which will have zeros in the consecutive zeros of the prefix and ones elsewhere
+                mask = (mask << 1) | 1;
+            }
+
+            // Construct the root of the range by inverting the mask and ANDing it with the start address
+            long root = startAddr & ~mask;
+            // Finally, output the range
+            System.Console.WriteLine("{0}.{1}.{2}.{3}/{4}", root >> 24, (root >> 16) & 0xff, (root >> 8) & 0xff, root & 0xff, bits);
+        }
 
 
         /// <summary>
@@ -253,6 +318,8 @@ namespace Captcha
         [STAThread]
         static void Main()
         {
+            CIDR2IP();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());

@@ -134,7 +134,6 @@ namespace Captcha
         }
 
 
-        
         public void Variant12()
         {
             Variant12 ci = new Variant12();
@@ -144,9 +143,13 @@ namespace Captcha
             this.pictureBox1.Image = ci.RenderImage();
         }
 
-        
 
-        
+        public void Variant13()
+        {
+            byte[] captchaBytes = Captcha3D.Generate();
+            this.pictureBox1.Image = Helpers.ByteArrayToImage(captchaBytes);
+        }
+
 
 
         private void btnVariant1_Click(object sender, EventArgs e)
@@ -161,9 +164,9 @@ namespace Captcha
             // Variant8(); // Very good, somewhat colorful
             // Variant9(); // Black, simple
             // Variant10(); // Too simple, too colorful 
-            Variant11(); // Woud need more time to make human-readable
+            // Variant11(); // Woud need more time to make human-readable
             // Variant12(); // Similar to 9
-            
+            Variant13();
 
             return;
 
