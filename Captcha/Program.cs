@@ -18,7 +18,7 @@ namespace Captcha
             dir = System.IO.Path.GetFullPath(dir);
 
             return dir;
-        }
+        } // End Function MapProjectPath 
 
 
         public class IpBlock
@@ -29,7 +29,7 @@ namespace Captcha
             public string represented_country_geoname_id; // Country that IP represents, e.g. US military base in Rammstein, Germany
             public string is_anonymous_proxy;
             public string is_satellite_provider;
-        }
+        } // End Class IpBlock 
 
 
         public class Location
@@ -40,8 +40,7 @@ namespace Captcha
             public string continent_name;
             public string country_iso_code; // ISO 3166-2,
             public string country_name;
-
-        }
+        } // End Class Location 
 
 
         public static void InsertSQL(System.Text.StringBuilder sb)
@@ -61,7 +60,7 @@ namespace Captcha
             {
                 csb.UserID = "";
                 csb.Password = "";
-            }
+            } // End if (!csb.IntegratedSecurity) 
 
             using (System.Data.Common.DbConnection con = new System.Data.SqlClient.SqlConnection(csb.ConnectionString))
             {
@@ -77,9 +76,11 @@ namespace Captcha
                     if (con.State != System.Data.ConnectionState.Closed)
                         con.Close();
 
-                }
-            }
-        }
+                } // End Using cmd 
+
+            } // End Using con 
+
+        } // End Sub InsertSQL 
 
 
         public static void ReadLineByLine(string fileName)
@@ -103,7 +104,7 @@ namespace Captcha
                         {
                             counter++;
                             continue;
-                        }
+                        } // End if (string.IsNullOrEmpty(line)) 
                             
 
                         sb.AppendLine(line);
@@ -114,21 +115,22 @@ namespace Captcha
                             InsertSQL(sb);
                             commandCounter = 0;
                             sb.Length = 0;
-                        }
+                        } // End if (commandCounter == 100) 
 
 
                         System.Console.WriteLine("Reading line {0}", counter);
                         System.Console.WriteLine(line);
                         counter++;
-                    }
+                    } // Whend 
 
-                }
+                } // End Using sr 
+
                 fs.Close();
-            }
+            } // End Using fs 
 
             if (sb.Length != 0)
                 InsertSQL(sb);
-        }
+        } // End Sub ReadLineByLine 
 
 
         /// <summary>
@@ -155,9 +157,6 @@ namespace Captcha
             fileIPv6 = System.IO.File.ReadAllText(fileIPv6, System.Text.Encoding.UTF8);
 
 
-
-
-
             fileIPv4 = fileIPv4.Replace("\r\n", "\n").Replace("\r", "\n");
             fileIPv6 = fileIPv6.Replace("\r\n", "\n").Replace("\r", "\n");
 
@@ -170,13 +169,11 @@ namespace Captcha
                 string[] values = line.Split(',');
                 System.Console.WriteLine(values);
                 System.Console.WriteLine(line);
-            }
+            } // Next i 
 
 
 
-
-
-                System.Console.WriteLine(fileIPv4);
+            System.Console.WriteLine(fileIPv4);
             System.Console.WriteLine(fileIPv6);
 
 
