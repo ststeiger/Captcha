@@ -34,3 +34,22 @@ WITH
     ROWTERMINATOR = '0x0a',
     TABLOCK
 );
+
+
+
+-- ----------------------------------------------------------
+
+  
+SELECT 
+	 --t1.*,t2.*
+	t2.country_name
+	,COUNT(*) as cnt 
+FROM geoip.geoip_blocks_temp AS t1
+LEFT JOIN geoip.geoip_locations_temp AS t2
+	ON t2.geoname_id = t1.geoname_id
+
+WHERE represented_country_geoname_id IS NOT NULL 
+
+GROUP BY t2.country_name 
+ORDER BY cnt DESC 
+
