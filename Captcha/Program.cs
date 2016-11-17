@@ -141,16 +141,13 @@ namespace Captcha
         {
             // IPv4Helper.Test();
             // IPv6Helper.Test();
-            System.Console.WriteLine(System.Text.Encoding.UTF8.CodePage);
-            System.Text.Encoding enc = System.Text.Encoding.GetEncoding("iso-8859-1");
-            System.Console.WriteLine(enc.CodePage);
 
-            string fileIPv4 = MapProjectPath(@"IP\GeoLite\GeoLite2-Country-Blocks-IPv4.csv");
-            string fileIPv6 = MapProjectPath(@"IP\GeoLite\GeoLite2-Country-Blocks-IPv6.csv");
+            string fileIPv4 = MapProjectPath(@"IP/GeoLite/GeoLite2-Country-Blocks-IPv4.csv");
+            string fileIPv6 = MapProjectPath(@"IP/GeoLite/GeoLite2-Country-Blocks-IPv6.csv");
 
-            string sqlFile = MapProjectPath(@"IP\GeoLite\geoip_locations_temp.sql");
+            string sqlFile = MapProjectPath(@"IP/GeoLite/geoip_locations_temp.sql");
             ReadLineByLine(sqlFile);
-            sqlFile = MapProjectPath(@"IP\GeoLite\geoip_blocks_temp.sql");
+            sqlFile = MapProjectPath(@"IP/GeoLite/geoip_blocks_temp.sql");
             ReadLineByLine(sqlFile);
 
             fileIPv4 = System.IO.File.ReadAllText(fileIPv4, System.Text.Encoding.UTF8);
