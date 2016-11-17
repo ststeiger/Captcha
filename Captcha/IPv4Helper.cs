@@ -16,7 +16,7 @@ namespace Captcha
             // IPrange2CIDR("88.84.128.0", "88.84.159.255");
             string cidr = IPrange2CIDR("5.39.40.96", "5.39.40.127");
             System.Console.WriteLine(cidr);
-        }
+        } // End Sub Test 
 
 
         // https://www.digitalocean.com/community/tutorials/understanding-ip-addresses-subnets-and-cidr-notation-for-networking
@@ -40,7 +40,7 @@ namespace Captcha
             string toRange = string.Format("{0}.{1}.{2}.{3}", ipend >> 24, (ipend >> 16) & 0xff, (ipend >> 8) & 0xff, ipend & 0xff);
 
             System.Console.WriteLine(fromRange + " - " + toRange);
-        }
+        } // End Function CIDR2IP 
 
 
         public static uint IP2num(string ip)
@@ -52,7 +52,7 @@ namespace Captcha
             uint fourth = System.UInt32.Parse(nums[3]);
 
             return (first << 24) | (second << 16) | (third << 8) | (fourth);
-        }
+        } // End Function IP2num 
 
 
         // https://dev.maxmind.com/geoip/
@@ -72,7 +72,7 @@ namespace Captcha
                 uint temp = startAddr;
                 startAddr = endAddr;
                 endAddr = temp;
-            }
+            } // End if (startAddr > endAddr) 
 
             // uint diff = endAddr - startAddr -1;
             // int bits =  32 - (int)System.Math.Ceiling(System.Math.Log10(diff) / System.Math.Log10(2));
@@ -91,13 +91,13 @@ namespace Captcha
                 bits--; // Every time we shift, that's one fewer consecutive zero bits in the prefix
                 // Accumulate a mask which will have zeros in the consecutive zeros of the prefix and ones elsewhere
                 // mask = (mask << 1) | 1;
-            }
+            } // Whend 
 
             return (ip1 + "/" + bits);
-        }
+        } // End Function IPrange2CIDR
 
 
-    }
+    } // End Class IPv4Helper 
 
 
-}
+} // End Namespace Captcha 

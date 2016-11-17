@@ -75,6 +75,29 @@ namespace Captcha
         }
 
 
+        public string ToIpV6()
+        {
+            string ipString = "";
+
+            //we display in total 4 parts for every long
+            ulong crtLong = this.Low;
+            for (int i = 0; i < 4; ++i)
+            {
+                ipString = (crtLong & 0xFFFF).ToString("x04") + (ipString == string.Empty ? "" : ":" + ipString);
+                crtLong = crtLong >> 16;
+            } // Next j 
+
+            crtLong = this.High;
+            for (int i = 0; i < 4; ++i)
+            {
+                ipString = (crtLong & 0xFFFF).ToString("x04") + (ipString == string.Empty ? "" : ":" + ipString);
+                crtLong = crtLong >> 16;
+            } // Next j 
+
+            return ipString;
+        } // End Function ToIpV6 
+        
+
         public bool Equals(UInt128 other)
         {
             return this.High == other.High && this.Low == other.Low;
