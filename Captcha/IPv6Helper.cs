@@ -233,7 +233,7 @@ namespace Captcha
         } // End Function LongToIP 
 
 
-    } // End Class 
+    } // End Class IPv6Helper 
 
 
-} // End Namespace 
+} // End Namespace Captcha 
