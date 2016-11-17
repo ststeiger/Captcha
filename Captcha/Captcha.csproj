@@ -49,10 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IPv4Helper.cs" />
-    <Compile Include="IPv6Helper.cs" />
-    <Compile Include="uint128.cs" />
-    <Compile Include="Variant1\Captcha3D\Captcha3D.cs" />
+    <Compile Include="Abstraction\AbstractCaptcha.cs" />
+    <Compile Include="Abstraction\ConcreteCaptcha.cs" />
+    <Compile Include="IP\IPv4Helper.cs" />
+    <Compile Include="IP\IPv6Helper.cs" />
+    <Compile Include="IP\UInt128.cs" />
+    <Compile Include="Captchas\Captcha3D\Captcha3D.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,22 +64,30 @@
     <Compile Include="Helpers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Variant1\Captcha3D\Markov.cs" />
-    <Compile Include="Variant1\Captcha3D\MathHelpers.cs" />
-    <Compile Include="Variant1\Var12.cs" />
-    <Compile Include="Variant1\Warping.cs" />
-    <Compile Include="Variant1\RNCaptcha.cs" />
-    <Compile Include="Variant1\var5Filters.cs" />
-    <Compile Include="Variant1\Var3.cs" />
-    <Compile Include="Variant1\Var1.cs" />
-    <Compile Include="Variant1\Var2.cs" />
-    <Compile Include="Variant1\Var4.cs" />
-    <Compile Include="Variant1\Var5.cs" />
-    <Compile Include="Variant1\Var6.cs" />
-    <Compile Include="Variant1\Var7.cs" />
-    <Compile Include="Variant1\Var8.cs" />
-    <Content Include="Variant1\info.txt" />
-    <Compile Include="Variant1\Var9.cs" />
+    <Compile Include="Captchas\Captcha3D\Markov.cs" />
+    <Compile Include="Captchas\Captcha3D\MathHelpers.cs" />
+    <Compile Include="Captchas\Var12.cs" />
+    <Compile Include="Captchas\Warping.cs" />
+    <Compile Include="Captchas\RNCaptcha.cs" />
+    <Compile Include="Captchas\var5Filters.cs" />
+    <Compile Include="Captchas\Var3.cs" />
+    <Compile Include="Captchas\Var1.cs" />
+    <Compile Include="Captchas\Var2.cs" />
+    <Compile Include="Captchas\Var4.cs" />
+    <Compile Include="Captchas\Var5.cs" />
+    <Compile Include="Captchas\Var6.cs" />
+    <Compile Include="Captchas\Var7.cs" />
+    <Compile Include="Captchas\Var8.cs" />
+    <Content Include="Captchas\info.txt" />
+    <Compile Include="Captchas\Var9.cs" />
+    <Content Include="IP\GeoLite\geoip_blocks_temp.sql" />
+    <Content Include="IP\GeoLite\geoip_locations_temp.sql" />
+    <Content Include="IP\GeoLite\GeoIP_Data_BulkInsert.sql" />
+    <Content Include="IP\GeoLite\GeoIP_Schema_Country.sql" />
+    <Content Include="IP\GeoLite\PollTakers.jpg" />
+    <Content Include="IP\GeoLite\COPYRIGHT.txt" />
+    <Content Include="IP\GeoLite\CSV_20161101.txt" />
+    <Content Include="IP\GeoLite\LICENSE.txt" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -90,6 +100,18 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Captchas\Captcha3D\Camera-Transform.pdf" />
+    <None Include="Captchas\Captcha3D\Viewing-Transformation.pdf" />
+    <None Include="IP\GeoLite\GeoLite2-Country-Blocks-IPv4.csv" />
+    <None Include="IP\GeoLite\GeoLite2-Country-Blocks-IPv6.csv" />
+    <None Include="IP\GeoLite\GeoLite2-Country-Locations-de.csv" />
+    <None Include="IP\GeoLite\GeoLite2-Country-Locations-en.csv" />
+    <None Include="IP\GeoLite\GeoLite2-Country-Locations-es.csv" />
+    <None Include="IP\GeoLite\GeoLite2-Country-Locations-fr.csv" />
+    <None Include="IP\GeoLite\GeoLite2-Country-Locations-ja.csv" />
+    <None Include="IP\GeoLite\GeoLite2-Country-Locations-pt-BR.csv" />
+    <None Include="IP\GeoLite\GeoLite2-Country-Locations-ru.csv" />
+    <None Include="IP\GeoLite\GeoLite2-Country-Locations-zh-CN.csv" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

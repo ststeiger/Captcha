@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Text;
+﻿
 using System.Windows.Forms;
+
 
 namespace Captcha
 {
+
+
     public partial class Form1 : Form
     {
+
+
         public Form1()
         {
             InitializeComponent();
@@ -23,6 +22,7 @@ namespace Captcha
             byte[] captchaBytes = Captcha.Variant1.GetCaptchaImage(sCaptchaText, System.Drawing.Imaging.ImageFormat.Png);
             this.pictureBox1.Image = Helpers.ByteArrayToImage(captchaBytes);
         }
+
 
         public void Variant2()
         {
@@ -40,6 +40,7 @@ namespace Captcha
             RandomImage ci = new RandomImage(CaptchaImageText, 300, 75);
             this.pictureBox1.Image = ci.Image;
         }
+
 
         public void Variant4()
         {
@@ -69,16 +70,16 @@ namespace Captcha
             // cc.FontSize = fFontSize;
             cc.Keyword = sKeyword;
 
-            using (Bitmap bmp = cc.makeCaptcha())
+            using (System.Drawing.Bitmap bmp = cc.makeCaptcha())
             {
 
-                using (MemoryStream ms = new MemoryStream())
+                using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
                 {
                     bmp.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
                     imageBytes = ms.ToArray();
-                }
-            
-            }
+                } // End Using ms 
+
+            } // End Using bmp 
 
             this.pictureBox1.Image = Helpers.ByteArrayToImage(imageBytes);
         }
@@ -151,8 +152,7 @@ namespace Captcha
         }
 
 
-
-        private void btnVariant1_Click(object sender, EventArgs e)
+        private void btnVariant1_Click(object sender, System.EventArgs e)
         {
             // Variant1(); // Quite good, but colorful
             // Variant2(); // Interesting, but bad 
@@ -174,6 +174,10 @@ namespace Captcha
             byte[] captchaBytes = Captcha.Variant7.CreateImage(sCaptchaText);
             this.pictureBox1.Image = Helpers.ByteArrayToImage(captchaBytes);
 
-        }
-    }
-}
+        } // End Sub btnVariant1_Click 
+
+
+    } // End partial class Form1 : Form
+
+
+} // End Namespace Captcha
