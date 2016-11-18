@@ -35,3 +35,8 @@ FROM
 
 
 -- https://www.postgresql.org/docs/8.2/static/functions-net.html
+
+
+-- Get CIDR from range:
+SELECT inet_merge('192.168.0.0', '192.168.128.255');
+ 
