@@ -20,6 +20,7 @@ namespace Captcha
 
             // IPrange2CIDR("88.84.128.0", "88.84.159.255");
             string cidr = IPrange2CIDR("5.39.40.96", "5.39.40.127");
+            cidr = IPrange2CIDR("192.168.1.1", "192.168.255.255");
             System.Console.WriteLine(cidr);
         } // End Sub Test 
 

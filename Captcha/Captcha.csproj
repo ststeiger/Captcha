@@ -84,6 +84,7 @@
     <Content Include="IP\GeoLite\geoip_locations_temp.sql" />
     <Content Include="IP\GeoLite\GeoIP_Data_BulkInsert.sql" />
     <Content Include="IP\GeoLite\GeoIP_Schema_Country.sql" />
+    <Content Include="IP\GeoLite\SQL.txt" />
     <Content Include="IP\GeoLite\PollTakers.jpg" />
     <Content Include="IP\GeoLite\COPYRIGHT.txt" />
     <Content Include="IP\GeoLite\CSV_20161101.txt" />

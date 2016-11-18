@@ -139,7 +139,7 @@ namespace Captcha
         [System.STAThread]
         static void Main()
         {
-            // IPv4Helper.Test();
+            IPv4Helper.Test();
             // IPv6Helper.Test();
 
             string fileIPv4 = MapProjectPath(@"IP/GeoLite/GeoLite2-Country-Blocks-IPv4.csv");
