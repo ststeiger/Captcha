@@ -17,6 +17,7 @@ namespace Captcha
             // Character list is fine tuned:
             // No 0-O-o
             string chars = "abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNPRSTUVWXYZ123456789";
+            
             int n = chars.Length;
 
             string captchaText = "";
@@ -65,12 +66,17 @@ namespace Captcha
 	        };
 
             string chars = "abcdefghijklmnopqrstuvwxyz";
+            // // string chars = "абцдефгхийклмнопюрстувжызчшщъыьэяжё";
+            // string chars = "абцдефгхийклмножюрстувжязчшщъыьэяёып";
+            
             string captchaText = "";
             int @char = rand(0, 25);
 
             for (int i = 0; i < length; i++)
             {
-                captchaText += (char)(@char + 65 + 32);
+                // captchaText += (char)(@char + 65 + 32);
+                // captchaText += (char)(@char + 'A' + 32);
+                captchaText+= chars[@char];
 
                 // Look up next char in transition matrix
                 double next = rand(0, 10000) / 10000.0;
@@ -85,6 +91,7 @@ namespace Captcha
 
             }
 
+            
             return captchaText;
         }
 

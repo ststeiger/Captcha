@@ -27,6 +27,8 @@ namespace Captcha
             return font;
         } // End Function GetCustomFont 
 
+        public static object fileLock = new object();
+
 
         public static byte[] Generate()
         {
@@ -38,7 +40,12 @@ namespace Captcha
 
 
             byte[] imageBytes = Generate(captchaText, System.Drawing.Imaging.ImageFormat.Png);
-            System.IO.File.WriteAllBytes("mesh.png", imageBytes);
+            
+            lock (fileLock)
+            {
+                System.IO.File.WriteAllBytes("mesh.png", imageBytes);
+                // System.IO.File.WriteAllBytes(captchaText + ".png", imageBytes);
+            }
             
             return imageBytes;
         } // End Function Generate 
@@ -86,7 +93,7 @@ namespace Captcha
                     {
                         System.Drawing.SizeF size = g.MeasureString(captchaText, font, new System.Drawing.PointF(10, 10), System.Drawing.StringFormat.GenericTypographic);
                         image2d_x = (int)(size.Width * 1.1) + 5;
-                        image2d_y = (int)(size.Height);
+                        image2d_y = (int)(size.Height)+5;
                     } // End Using g 
 
                 } // End Using bmp 
@@ -147,7 +154,22 @@ namespace Captcha
                     //g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.Default;
                     g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
-                    g.Clear(System.Drawing.Color.White);
+                    // g.Clear(System.Drawing.Color.White);
+
+                    System.Drawing.Rectangle rect = new System.Drawing.Rectangle(0, 0, image3d.Width, image3d.Height);
+
+                    System.Drawing.Drawing2D.HatchBrush hatchBrush = new System.Drawing.Drawing2D.HatchBrush(
+                        System.Drawing.Drawing2D.HatchStyle.LightDownwardDiagonal,
+                        System.Drawing.Color.Blue
+                        //, System.Drawing.Color.Black
+                        , System.Drawing.Color.Lavender
+                    );
+
+                    g.FillRectangle(hatchBrush, rect);
+
+
+
+
                     int count = 0;
                     double scale = 1.75 - image2d_x / 400.0;
 
@@ -167,6 +189,7 @@ namespace Captcha
 
                                 //using (System.Drawing.Pen pen = new System.Drawing.Pen(System.Drawing.Color.Blue, 0.25f)) { g.DrawLine(pen, (int)x0, (int)y0, (int)x1, (int)y1); }
                                 g.DrawLine(System.Drawing.Pens.Blue, (int)x0, (int)y0, (int)x1, (int)y1);
+                                // g.DrawLine(System.Drawing.Pens.White, (int)x0, (int)y0, (int)x1, (int)y1);
                             } // End if (x > 0) 
 
                             count++;

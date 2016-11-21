@@ -51,9 +51,9 @@
   <ItemGroup>
     <Compile Include="Abstraction\AbstractCaptcha.cs" />
     <Compile Include="Abstraction\ConcreteCaptcha.cs" />
-    <Compile Include="IP\IPv4Helper.cs" />
-    <Compile Include="IP\IPv6Helper.cs" />
-    <Compile Include="IP\UInt128.cs" />
+    <Compile Include="Password\CryptRandom.cs" />
+    <Compile Include="Password\AbstractPasswordOptions.cs" />
+    <Compile Include="Password\PasswordGenerator.cs" />
     <Compile Include="Captchas\Captcha3D\Captcha3D.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -80,15 +80,7 @@
     <Compile Include="Captchas\Var8.cs" />
     <Content Include="Captchas\info.txt" />
     <Compile Include="Captchas\Var9.cs" />
-    <Content Include="IP\GeoLite\geoip_blocks_temp.sql" />
-    <Content Include="IP\GeoLite\geoip_locations_temp.sql" />
-    <Content Include="IP\GeoLite\GeoIP_Data_BulkInsert.sql" />
-    <Content Include="IP\GeoLite\GeoIP_Schema_Country.sql" />
-    <Content Include="IP\GeoLite\SQL.txt" />
-    <Content Include="IP\GeoLite\PollTakers.jpg" />
-    <Content Include="IP\GeoLite\COPYRIGHT.txt" />
-    <Content Include="IP\GeoLite\CSV_20161101.txt" />
-    <Content Include="IP\GeoLite\LICENSE.txt" />
+    <Content Include="Password\ConsoleFont.png" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -103,16 +95,6 @@
     </Compile>
     <None Include="Captchas\Captcha3D\Camera-Transform.pdf" />
     <None Include="Captchas\Captcha3D\Viewing-Transformation.pdf" />
-    <None Include="IP\GeoLite\GeoLite2-Country-Blocks-IPv4.csv" />
-    <None Include="IP\GeoLite\GeoLite2-Country-Blocks-IPv6.csv" />
-    <None Include="IP\GeoLite\GeoLite2-Country-Locations-de.csv" />
-    <None Include="IP\GeoLite\GeoLite2-Country-Locations-en.csv" />
-    <None Include="IP\GeoLite\GeoLite2-Country-Locations-es.csv" />
-    <None Include="IP\GeoLite\GeoLite2-Country-Locations-fr.csv" />
-    <None Include="IP\GeoLite\GeoLite2-Country-Locations-ja.csv" />
-    <None Include="IP\GeoLite\GeoLite2-Country-Locations-pt-BR.csv" />
-    <None Include="IP\GeoLite\GeoLite2-Country-Locations-ru.csv" />
-    <None Include="IP\GeoLite\GeoLite2-Country-Locations-zh-CN.csv" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
