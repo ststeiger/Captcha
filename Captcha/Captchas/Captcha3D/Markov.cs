@@ -7,10 +7,12 @@ namespace Captcha
     {
         private static System.Random seed = new System.Random();
 
+
         public static int rand(int min, int max)
         {
             return seed.Next(min, max + 1);
-        }
+        } // End Function rand 
+
 
         public static string generateCaptchaTextRandom(int length)
         {
@@ -25,15 +27,15 @@ namespace Captcha
             for (int i = 0; i < length; i++)
             {
                 captchaText += chars[rand(0, n - 1)];
-            }
+            } // Next i 
 
             return captchaText;
-        }
+        } // End Function generateCaptchaTextRandom 
+
 
         // Generate a random word using a Markov chain.
         // The transition matrix was calculated with Oscar Wilde's The Picture of Dorian Gray.
         // Markov chains produce quite easy to type words.
-
         public static string generateCaptchaTextMarkov(int length)
         {
             var transitionMatrix = new double[]{
@@ -70,36 +72,37 @@ namespace Captcha
             // string chars = "абцдефгхийклмножюрстувжязчшщъыьэяёып";
             
             string captchaText = "";
-            int @char = rand(0, 25);
+            int randomValue = rand(0, 25);
 
             for (int i = 0; i < length; i++)
             {
                 // captchaText += (char)(@char + 65 + 32);
                 // captchaText += (char)(@char + 'A' + 32);
-                captchaText+= chars[@char];
+                captchaText += chars[randomValue];
 
                 // Look up next char in transition matrix
                 double next = rand(0, 10000) / 10000.0;
                 for (int j = 0; j < 26; j++)
                 {
-                    if (next < transitionMatrix[@char * 26 + j])
+
+                    if (next < transitionMatrix[randomValue * 26 + j])
                     {
-                        @char = j;
+                        randomValue = j;
                         break;
-                    }
-                }
+                    } // End if (next < transitionMatrix[randomValue * 26 + j]) 
 
-            }
+                } // Next j 
 
-            
+            } // Next i 
+
             return captchaText;
-        }
+        } // End Function generateCaptchaTextMarkov 
 
 
         public static int preg_match(string needle, string haystack)
         {
             return System.Globalization.CultureInfo.InvariantCulture.CompareInfo.IndexOf(haystack, needle, System.Globalization.CompareOptions.OrdinalIgnoreCase);
-        }
+        } // End Function preg_match 
 
 
         public static string generateCaptchaTextMarkovClean(int length)
@@ -155,10 +158,10 @@ namespace Captcha
             );
 
             return c;
-        }
+        } // End Function generateCaptchaTextMarkovClean 
         
 
-    }
+    } // End Class Markov 
 
 
-}
+} // End Namespace Captcha 

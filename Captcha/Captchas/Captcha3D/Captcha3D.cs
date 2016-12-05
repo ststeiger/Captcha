@@ -45,7 +45,7 @@ namespace Captcha
             {
                 System.IO.File.WriteAllBytes("mesh.png", imageBytes);
                 // System.IO.File.WriteAllBytes(captchaText + ".png", imageBytes);
-            }
+            } // End lock (fileLock) 
             
             return imageBytes;
         } // End Function Generate 
