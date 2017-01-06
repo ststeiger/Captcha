@@ -12,13 +12,11 @@ namespace Captcha
             set;
         }
 
-
         public virtual string PASSWORD_CHARS_UCASE
         {
             get;
             set;
         }
-
 
         public virtual string PASSWORD_CHARS_NUMERIC
         {
@@ -26,13 +24,11 @@ namespace Captcha
             set;
         }
 
-
         public virtual string PASSWORD_CHARS_SPECIAL
         {
             get;
             set;
         }
-
 
         public virtual int NumberOfLowerCaseCharacters
         {
@@ -52,13 +48,11 @@ namespace Captcha
             set;
         }
 
-
         public virtual int NumberOfSpecialCharacters
         {
             get;
             set;
         }
-
 
         public virtual int TotalPasswordLength
         {
@@ -80,7 +74,6 @@ namespace Captcha
     } // End Class GenericPasswordOptions 
 
 
-
     public class SafePasswordOptions : AbstractPasswordOptions
     {
 
@@ -100,14 +93,13 @@ namespace Captcha
     } // End Class SafePasswordOptions 
 
 
-
     public class EnglishPasswordOptions : AbstractPasswordOptions
     {
 
         public EnglishPasswordOptions()
         {
-            // this.PASSWORD_CHARS_LCASE = "abcdefgijkmnopqrstwxyz";
-            this.PASSWORD_CHARS_LCASE = "abcdefgijklmnopqrstuvwxyz";
+            // this.PASSWORD_CHARS_LCASE = "abcdefghijkmnopqrstwxyz";
+            this.PASSWORD_CHARS_LCASE = "abcdefghijklmnopqrstuvwxyz";
 
             // this.PASSWORD_CHARS_UCASE = "ABCDEFGHJKLMNPQRSTWXYZ";
             this.PASSWORD_CHARS_UCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -160,8 +152,12 @@ namespace Captcha
 
         public GermanPasswordOptions()
         {
-            PASSWORD_CHARS_LCASE = "aäbcdefgiïjklmnoöpqrsßtuüvwxyz";
-            PASSWORD_CHARS_UCASE = "AÄBCDEFGHIÏJKLMNOÖPQRSTUÜVWXYZ";
+            // PASSWORD_CHARS_LCASE = "aäbcdefgiïjklmnoöpqrsßtuüvwxyz";
+            // PASSWORD_CHARS_UCASE = "AÄBCDEFGHIÏJKLMNOÖPQRSTUÜVWXYZ";
+
+            PASSWORD_CHARS_LCASE = "aäbcdefghijklmnoöpqrsßtuüvwxyz";
+            PASSWORD_CHARS_UCASE = "AÄBCDEFGHIJKLMNOÖPQRSTUÜVWXYZ";
+
             PASSWORD_CHARS_NUMERIC = "0123456789";
             PASSWORD_CHARS_SPECIAL = "*-+=_&!?$€£%{}()[]/\\|.:;";
             NumberOfLowerCaseCharacters = 5;
@@ -171,6 +167,24 @@ namespace Captcha
         } // End Constructor 
 
     } // End Class GermanPasswordOptions 
+
+
+    public class SwissPasswordOptions : AbstractPasswordOptions
+    {
+
+        public SwissPasswordOptions()
+        {
+            PASSWORD_CHARS_LCASE = "abcdefghijklmnopqrstuvwxyz";
+            PASSWORD_CHARS_UCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            PASSWORD_CHARS_NUMERIC = "0123456789";
+            PASSWORD_CHARS_SPECIAL = "*-+=_&!?$€£%{}()[]/\\|.:;";
+            NumberOfLowerCaseCharacters = 5;
+            NumberOfUpperCaseCharacters = 1;
+            NumberOfNumericCharacters = 3;
+            NumberOfSpecialCharacters = 1;
+        } // End Constructor 
+
+    } // End Class SwissPasswordOptions 
 
 
 } // End Namespace Captcha 

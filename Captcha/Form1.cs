@@ -152,6 +152,8 @@ namespace Captcha
         }
 
 
+
+
         private void btnVariant1_Click(object sender, System.EventArgs e)
         {
             // Variant1(); // Quite good, but colorful
@@ -174,6 +176,40 @@ namespace Captcha
             byte[] captchaBytes = Captcha.Variant7.CreateImage(sCaptchaText);
             this.pictureBox1.Image = Helpers.ByteArrayToImage(captchaBytes);
 
+        }
+
+
+        public System.Data.DataTable GetRandomPasswords()
+        {
+            System.Data.DataTable dt = new System.Data.DataTable();
+            dt.Columns.Add("id", typeof(int));
+            dt.Columns.Add("password", typeof(string));
+            dt.Columns.Add("des3", typeof(string));
+
+
+            System.Data.DataRow dr = null;
+
+
+            AbstractPasswordOptions passwordOptions = new SwissPasswordOptions();
+
+            for (int i = 0; i < 1000; ++i)
+            {
+                dr = dt.NewRow();
+                dr["id"] = i + 1;
+                string pw = PasswordGenerator.RandomPassword(passwordOptions);
+                dr["password"] = pw;
+                dr["des3"] = Cryptography.DES.Encrypt(pw);
+
+                dt.Rows.Add(dr);
+            }
+
+            return dt;
+        }
+
+
+        private void button1_Click(object sender, System.EventArgs e)
+        {
+            dgvPasswordDisplay.DataSource = GetRandomPasswords();
         } // End Sub btnVariant1_Click 
 
 

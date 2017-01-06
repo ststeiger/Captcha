@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Abstraction\AbstractCaptcha.cs" />
     <Compile Include="Abstraction\ConcreteCaptcha.cs" />
+    <Compile Include="Password\CryptoFunctions.cs" />
     <Compile Include="Password\CryptRandom.cs" />
     <Compile Include="Password\AbstractPasswordOptions.cs" />
     <Compile Include="Password\PasswordGenerator.cs" />
@@ -81,6 +82,8 @@
     <Content Include="Captchas\info.txt" />
     <Compile Include="Captchas\Var9.cs" />
     <Content Include="Password\ConsoleFont.png" />
+    <Content Include="Password\PasswortVorrat.sql" />
+    <Content Include="Password\Sessions.sql" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
