@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstraction\AbstractCaptcha.cs" />
+    <Compile Include="Abstraction\Captcha3d.cs" />
     <Compile Include="Abstraction\ConcreteCaptcha.cs" />
     <Compile Include="Password\CryptoFunctions.cs" />
     <Compile Include="Password\CryptRandom.cs" />

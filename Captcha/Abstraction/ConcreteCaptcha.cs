@@ -1,7 +1,9 @@
 ﻿
+using System.Drawing;
+
+
 namespace Captcha.Abstraction
 {
-
 
     public class ConcreteCaptcha : AbstractCaptcha
     {
@@ -69,9 +71,9 @@ namespace Captcha.Abstraction
                 {
                     new System.Drawing.PointF(random.Next(rect.Width) / v, random.Next(
                         rect.Height) / v),
-                    new System.Drawing.PointF(rect.Width - random.Next(rect.Width) / v, 
+                    new System.Drawing.PointF(rect.Width - random.Next(rect.Width) / v,
                         random.Next(rect.Height) / v),
-                    new System.Drawing.PointF(random.Next(rect.Width) / v, 
+                    new System.Drawing.PointF(random.Next(rect.Width) / v,
                         rect.Height - random.Next(rect.Height) / v),
                     new System.Drawing.PointF(rect.Width - random.Next(rect.Width) / v,
                         rect.Height - random.Next(rect.Height) / v)
@@ -97,10 +99,10 @@ namespace Captcha.Abstraction
             hatchBrush.Dispose();
             g.Dispose();
             return bitmap;
-        }
+        } // End Function 
 
 
-    }
+    } // End Class ConcreteCaptcha 
 
 
-}
+} // End Namespace 

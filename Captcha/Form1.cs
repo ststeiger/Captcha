@@ -168,7 +168,10 @@ namespace Captcha
             // Variant10(); // Too simple, too colorful 
             // Variant11(); // Woud need more time to make human-readable
             // Variant12(); // Similar to 9
-            Variant13();
+            // Variant13();
+
+            var xa = new Captcha.Abstraction.Captcha3D();
+            this.pictureBox1.Image = xa.Image;
 
             return;
 
