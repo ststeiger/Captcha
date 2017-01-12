@@ -62,8 +62,9 @@ namespace Captcha
                 if (c >= '0' && c <= '9')
                 {
                     ret++;
-                }
-            }
+                } // End if (c >= '0' && c <= '9') 
+
+            } // Next i 
 
             return ret;
         }
@@ -199,4 +200,6 @@ namespace Captcha
 
 
     }
+
+
 }

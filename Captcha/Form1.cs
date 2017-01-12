@@ -152,8 +152,6 @@ namespace Captcha
         }
 
 
-
-
         private void btnVariant1_Click(object sender, System.EventArgs e)
         {
             // Variant1(); // Quite good, but colorful

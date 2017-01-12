@@ -1,6 +1,4 @@
-﻿
-
-'
+﻿'
 ' * Original version by Stephen Toub and Shawn Farkas.
 ' * Random pool and thread safety added by Markus Olsson (freakcode.com).
 ' * 
@@ -40,12 +38,13 @@
 ' 
 
 
-
 Imports System.Diagnostics.CodeAnalysis
 Imports System.Security.Cryptography
 
 
-Namespace Captcha.Cryptography
+Namespace Cryptography
+
+
     ''' <summary>
     ''' A random number generator based on the RNGCryptoServiceProvider.
     ''' Adapted from the "Tales from the CryptoRandom" article in MSDN Magazine (September 2007)
@@ -72,8 +71,8 @@ Namespace Captcha.Cryptography
             Get
                 Return m_IsRandomPoolEnabled
             End Get
-            Private Set
-                m_IsRandomPoolEnabled = Value
+            Private Set(value As Boolean)
+                m_IsRandomPoolEnabled = value
             End Set
         End Property
         Private m_IsRandomPoolEnabled As Boolean
@@ -267,6 +266,8 @@ Namespace Captcha.Cryptography
             System.GC.SuppressFinalize(Me)
         End Sub
 
+
+
         Public Disposed As Boolean = False
 
         Protected Overridable Sub Dispose(dispose__1 As Boolean)
@@ -286,4 +287,6 @@ Namespace Captcha.Cryptography
 
 
     End Class
+
+
 End Namespace
