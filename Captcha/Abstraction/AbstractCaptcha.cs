@@ -6,8 +6,24 @@ namespace Captcha
     public abstract class AbstractCaptcha
     {
 
-        public string m_text;
+        private System.Guid? m_guid;
+        private string m_text;
         private System.Drawing.Imaging.ImageFormat m_imageFormat;
+        private string m_MimeType;
+
+
+        public virtual System.Guid UID
+        {
+            get
+            {
+                if (this.m_guid.HasValue)
+                    return this.m_guid.Value;
+
+                this.m_guid = System.Guid.NewGuid();
+                return this.m_guid.Value;
+            }
+            set { this.m_guid = value; }
+        }
 
 
         public virtual string Text
@@ -57,7 +73,7 @@ namespace Captcha
                 }
                 return s;
             }
-        }
+        } // End Property RandomToken 
 
 
         public virtual System.Drawing.Imaging.ImageFormat Format
@@ -75,8 +91,6 @@ namespace Captcha
             }
         }
 
-
-        private string m_MimeType;
 
         public virtual string MimeType
         {
@@ -113,7 +127,6 @@ namespace Captcha
         }
 
 
-
         public virtual byte[] ImageBytes
         {
             get
@@ -130,13 +143,17 @@ namespace Captcha
             }
         }
 
-        public virtual string Base64()
+
+        public virtual string Base64
         {
-            return System.Convert.ToBase64String(this.ImageBytes);
+            get
+            {
+                return System.Convert.ToBase64String(this.ImageBytes);
+            }
         }
 
 
-    }
+    } // End Abstract class AbstractCaptcha 
 
 
-}
+} // End Namespace Captcha 

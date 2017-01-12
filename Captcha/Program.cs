@@ -6,12 +6,8 @@ namespace Captcha
 {
 
 
-
-
     static class Program
     {
-
-
 
 
         /// <summary>
