@@ -9,9 +9,23 @@ namespace Captcha
         {
             // http://stackoverflow.com/questions/5750203/how-to-write-unicode-characters-to-the-console
             System.Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+
+            System.Web.SessionState.SessionIDManager man = new System.Web.SessionState.SessionIDManager();
             
+
             for (int i = 0; i < 100; ++i)
             {
+                string sessid = man.CreateSessionID(null);
+                int num = CountNumeric(sessid);
+                System.Console.WriteLine(num.ToString() + ":  " + sessid);
+
+
+                string mySessId = RandomPassword(new SessionUidOptions());
+                System.Console.WriteLine(mySessId);
+
+
+
                 // string pw = CreatePassword(8);
                 // string pw = RandomPassword(new PasswordOptions());
 
@@ -31,11 +45,27 @@ namespace Captcha
                 //});
 
 
-                string pw = RandomPassword(new SafePasswordOptions());
-                
-                System.Console.WriteLine(pw);
+                // string pw = RandomPassword(new SafePasswordOptions());
+                // System.Console.WriteLine(pw);
             }
-            
+
+        }
+
+
+        public static int CountNumeric(string str)
+        {
+            int ret = 0;
+
+            for (int i = 0; i < str.Length; ++i)
+            {
+                char c = str[i];
+                if (c >= '0' && c <= '9')
+                {
+                    ret++;
+                }
+            }
+
+            return ret;
         }
 
 
@@ -54,7 +84,7 @@ namespace Captcha
 
             char[] pwChars = new char[options.TotalPasswordLength];
 
-            using (Captcha.Cryptography.CryptoRandom rnd = new Captcha.Cryptography.CryptoRandom())
+            using (Captcha.Cryptography.CryptoRandom rnd = options.RandomNumberGenerator)
             {
 
                 for (int i = 0; i < options.NumberOfLowerCaseCharacters; ++i)
@@ -92,7 +122,7 @@ namespace Captcha
             } // End Using rnd 
 
             return new string(pwChars);
-        } // End Function RandomPassword 
+        }// End Function RandomPassword 
 
 
         public static void Shuffle<T>(T[] list)

@@ -53,7 +53,7 @@ namespace Captcha.Cryptography
     /// an optional (enabled by default) random buffer which provides a significant speed boost as
     /// it greatly reduces the amount of calls into unmanaged land.
     /// </summary>
-    public class CryptoRandom : Random, System.IDisposable
+    public class CryptoRandom : System.Random, System.IDisposable
     {
         private RNGCryptoServiceProvider _rng = new RNGCryptoServiceProvider();
 
@@ -262,6 +262,7 @@ namespace Captcha.Cryptography
             System.GC.SuppressFinalize(this);
         }
 
+        public bool Disposed = false;
 
         protected virtual void Dispose(bool dispose)
         {
@@ -276,6 +277,8 @@ namespace Captcha.Cryptography
                 if (_rng != null)
                     _rng.Dispose();
             }
+
+            this.Disposed = true;
         }
         
 

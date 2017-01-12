@@ -6,6 +6,26 @@ namespace Captcha
     public class AbstractPasswordOptions
     {
 
+        Cryptography.CryptoRandom m_Seed;
+
+        public virtual Cryptography.CryptoRandom RandomNumberGenerator
+        {
+            get
+            {
+                if (m_Seed != null && m_Seed.Disposed)  m_Seed = null;
+
+                if (m_Seed == null)
+                    m_Seed = new Cryptography.CryptoRandom();
+
+                return this.m_Seed;
+            }
+            set
+            {
+                this.m_Seed = value;
+            }
+        }
+
+
         public virtual string PASSWORD_CHARS_LCASE
         {
             get;
@@ -185,6 +205,26 @@ namespace Captcha
         } // End Constructor 
 
     } // End Class SwissPasswordOptions 
+
+
+    public class SessionUidOptions : AbstractPasswordOptions
+    {
+
+        public SessionUidOptions()
+        {
+            this.PASSWORD_CHARS_LCASE = "abcdefghijklmnopqrstuvwxyz";
+            this.PASSWORD_CHARS_UCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            this.PASSWORD_CHARS_NUMERIC = "0123456789";
+            this.PASSWORD_CHARS_SPECIAL = "";
+
+
+            this.NumberOfNumericCharacters = this.RandomNumberGenerator.Next(0, 10);
+            this.NumberOfLowerCaseCharacters = 24 - this.NumberOfNumericCharacters;
+            this.NumberOfUpperCaseCharacters = 0;
+            this.NumberOfSpecialCharacters = 0;
+        } // End Constructor 
+
+    } // End Class EnglishPasswordOptions 
 
 
 } // End Namespace Captcha 

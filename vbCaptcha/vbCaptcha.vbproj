@@ -94,6 +94,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="pt\AuthModule.vb" />
+    <Compile Include="pt\Benutzer.vb" />
+    <Compile Include="Session\AbstractPasswordOptions.vb" />
+    <Compile Include="Session\CryptRandom.vb" />
+    <Compile Include="Session\PasswordGenerator.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
